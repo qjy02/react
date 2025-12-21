@@ -1,5 +1,6 @@
 import './style.css';
 
+// Footer Component
 function Footer() {
   return (
     <footer className="center footer-theme p-4">
