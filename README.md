@@ -1,6 +1,8 @@
 # React Project
 This is a simple React project that includes a header and footer component with custom styling.
 
+Link: https://qjy02.github.io/react/
+
 ## Components
 - **Header**: A header component styled with a gradient background and shadow effects.
 - **Footer**: A footer component styled similarly to the header.
