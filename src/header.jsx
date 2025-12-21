@@ -4,7 +4,7 @@ import './style.css';
 function Header() {
   return (
     <header className="center header-theme p-4">
-        <a href="/">
+        <a href="/react/">
             <img 
                 src='Vispiv.png'
                 alt='Vispiv Logo' 
