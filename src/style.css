@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* COLOR SECTION */
+:root {
+  --background-color: #b5d4e6;
+  --header-footer-color: rgba(152, 144, 194, 0.842);
+  --text-color: #b5d4e6;
+  --black: #000000;
+  --white: #ffffff;
+  --purple-dark: #5a189a;
+  --purple-medium: #7b2cbf;
+  --purple-light: #9d4edd;
+  --purple-accent: #c77dff;
+  --shadow-purple: rgba(157, 78, 221, 0.4);
+  --shadow-purple-dark: rgba(93, 24, 154, 0.3);
+}
+
+/* BACKGROUND THEME */
+.background-theme {
+  /*background-color: var(--background-color);*/
+  background-image: url('/background.jpg'); 
+  background-size: cover;
+  background-position: center;
+  color: var(--text-color);
+}
+
+/* HEADER SECTION */
+.header-theme {
+  background: linear-gradient(
+    90deg,
+    var(--purple-dark) 0%,
+    var(--purple-medium) 50%,
+    var(--purple-light) 100%
+  );
+  color: var(--white);
+  box-shadow: 
+    0 4px 15px var(--shadow-purple),
+    0 8px 25px var(--shadow-purple-dark);
+  border-bottom: 3px solid var(--purple-accent);
+  position: relative;
+  overflow: hidden;
+}
+
+/* FOOTER SECTION */
+.footer-theme {
+  background: linear-gradient(
+    90deg,
+    var(--purple-light) 0%,
+    var(--purple-medium) 50%,
+    var(--purple-dark) 100%
+  );
+  color: var(--white);
+  box-shadow: 
+    0 -4px 15px var(--shadow-purple),
+    0 -8px 25px var(--shadow-purple-dark);
+  border-top: 3px solid var(--purple-accent);
+}
+
+/* FONT THEME */
+.font-patrick {
+  font-family: 'Patrick Hand', cursive;
+}
+
+
+/* CENTER SECTION */
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
