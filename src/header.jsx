@@ -11,7 +11,7 @@ function Header() {
                 className='h-12 sm:h-16 mr-4 cursor-pointer' 
             />
         </a>
-        <a href="/"><h2 className="text-2xl font-bold font-patrick">Vipo Playground</h2></a>
+        <a href="/react/"><h2 className="text-2xl font-bold font-patrick">Vipo Playground</h2></a>
     </header>
   );
 }
