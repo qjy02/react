@@ -1,0 +1,102 @@
+import { useEffect, useState } from 'react';
+import './style.css';
+
+function Navigate({ onCardClick }) {
+  const cards = [
+    { id: 1, title: 'Memory Game', image: 'card/memory_game.png', page: 'memorygame' },
+    { id: 2, title: 'Tic Tac Toe', image: 'card/tictactoe.png', page: '' },
+    { id: 3, title: '???', image: 'vipo/vipo_excited.png', page: '' },
+    { id: 4, title: '???', image: 'vipo/vipo_sad.png', page: '' },
+    { id: 5, title: '???', image: 'vipo/vipo_angry.png', page: '' },
+    { id: 6, title: '???', image: 'vipo/vipo_shocked.png', page: '' },
+    { id: 7, title: '???', image: 'vipo/vipo_excited.png', page: '' },
+    { id: 8, title: '???', image: 'vipo/vipo_sad.png', page: '' },
+  ];
+
+  const message = "Welcome! What do you want to play with Vipo today?";
+  const [displayedText, setDisplayedText] = useState('');
+  const [showGrid, setShowGrid] = useState(false);
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+        index++;
+        setDisplayedText(message.slice(0, index));
+        if (index >= message.length) {
+          clearInterval(interval);
+          // Show grid after text animation completes
+          setTimeout(() => setShowGrid(true), 300);
+        }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [message]);
+
+  const handleCardClick = (card) => {
+    if (card.page && onCardClick) {
+      onCardClick(card.page);
+    }
+  };
+
+  return (
+    <div className="mt-8 space-y-8 px-4 sm:px-6 pb-8 sm:pb-12">
+      {/* Speech BUBBLE SECTION */}
+      <div className="relative animate-[fadeIn_1s_ease-out_forwards] opacity-0">
+        {/* SPEECH BUBBLE CONTAINER */}
+        <div className="bg-linear-to-r from-slate-400 to-slate-500 p-4 sm:p-6 rounded-3xl shadow-2xl max-w-lg relative mr-16 sm:mr-24">
+            <p className="text-white font-bold font-patrick text-base sm:text-lg">
+                {displayedText}
+                {displayedText.length < message.length && (
+                    <span className="inline-block w-1 h-4 sm:h-5 ml-1 bg-white animate-pulse"></span>
+                )}
+            </p>
+
+            {/* SPEECH BUBBLE POINTER SECTION */}
+            <div className="absolute -right-3 sm:-right-4 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-10 sm:border-t-12 border-b-10 sm:border-b-12 border-l-12 sm:border-l-16 border-t-transparent border-b-transparent border-l-slate-500"></div>
+        </div>
+        
+        {/* VIPO CHARACTER POSITION SECTION */}
+        <div className="absolute -bottom-4 sm:-bottom-2 right-0 sm:right-4">
+            <img
+                src="vipo/vipo.png"
+                alt="Vipo Mascot"
+                className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-lg"
+            />
+        </div>
+      </div>
+
+      {/* CARD GRID SECTION */}
+      <div className={`transition-all duration-700 ${showGrid ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 pt-8 px-2 sm:px-0 mb-8 sm:mb-12">
+          {cards.map((card) => (
+              <div
+                  key={card.id}
+                  onClick={() => handleCardClick(card)}
+                  className={`flex flex-col items-center bg-linear-to-br from-slate-50 to-slate-100 rounded-xl p-3 sm:p-4 hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 border border-slate-200 ${
+                    !card.page ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+              >
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className={`w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg mb-2 sm:mb-3 drop-shadow-md ${
+                      !card.page ? 'opacity-70' : ''
+                    }`}
+                  />
+                  <span className="text-slate-700 font-patrick font-bold text-center decoration-slate-400 text-sm sm:text-base">
+                    {card.title}
+                    {!card.page && (
+                      <span className="block text-xs text-slate-500 font-normal mt-1">
+                        Coming Soon
+                      </span>
+                    )}
+                  </span>
+              </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Navigate;
