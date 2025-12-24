@@ -163,7 +163,7 @@ function MemoryGame() {
                 <button
                     onClick={() => {
                         if (window.confirm('Return to home page? Your current game progress will be lost.')) {
-                        window.location.href = '/';
+                        window.location.href = '/react/';
                         }
                     }}
                     className="flex-1 px-6 py-3 bg-linear-to-r from-slate-100 to-slate-200 text-slate-700 font-bold font-patrick rounded-full shadow-[0_4px_0_0_rgba(148,163,184,0.8)] hover:shadow-[0_4px_0_0_rgba(148,163,184,0.8),0_8px_16px_rgba(0,0,0,0.1)] active:shadow-[0_2px_0_0_rgba(148,163,184,0.8)] active:translate-y-0.5 transform transition-all duration-200 hover:-translate-y-0.5 cursor-pointer border-b-4 border-slate-300 hover:border-slate-400 text-center"

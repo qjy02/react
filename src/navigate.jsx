@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
+import { paths } from './utils/path';
 import './style.css';
 
 function Navigate({ onCardClick }) {
   const cards = [
-    { id: 1, title: 'Memory Game', image: 'card/memory_game.png', page: 'memorygame' },
-    { id: 2, title: 'Tic Tac Toe', image: 'card/tictactoe.png', page: '' },
-    { id: 3, title: '???', image: 'vipo/vipo_excited.png', page: '' },
-    { id: 4, title: '???', image: 'vipo/vipo_sad.png', page: '' },
-    { id: 5, title: '???', image: 'vipo/vipo_angry.png', page: '' },
-    { id: 6, title: '???', image: 'vipo/vipo_shocked.png', page: '' },
-    { id: 7, title: '???', image: 'vipo/vipo_excited.png', page: '' },
-    { id: 8, title: '???', image: 'vipo/vipo_sad.png', page: '' },
+    { id: 1, title: 'Memory Game', image: 'card/memory_game.png', page: 'memorygame', path: paths.memoryGame },
+    { id: 2, title: 'Tic Tac Toe', image: 'card/tictactoe.png', page: '', path: '' },
+    { id: 3, title: '???', image: 'vipo/vipo_excited.png', page: '', path: '' },
+    { id: 4, title: '???', image: 'vipo/vipo_sad.png', page: '', path: '' },
+    { id: 5, title: '???', image: 'vipo/vipo_angry.png', page: '', path: '' },
+    { id: 6, title: '???', image: 'vipo/vipo_shocked.png', page: '', path: '' },
+    { id: 7, title: '???', image: 'vipo/vipo_excited.png', page: '', path: '' },
+    { id: 8, title: '???', image: 'vipo/vipo_sad.png', page: '', path: '' },
   ];
 
   const message = "Welcome! What do you want to play with Vipo today?";
@@ -34,16 +35,16 @@ function Navigate({ onCardClick }) {
 
   const handleCardClick = (card) => {
     if (card.page && onCardClick) {
-      onCardClick(card.page);
+      onCardClick(card.page, card.path);
     }
   };
 
-  return (
+ return (
     <div className="mt-8 space-y-8 px-4 sm:px-6 pb-8 sm:pb-12">
       {/* Speech BUBBLE SECTION */}
       <div className="relative animate-[fadeIn_1s_ease-out_forwards] opacity-0">
         {/* SPEECH BUBBLE CONTAINER */}
-        <div className="bg-linear-to-r from-slate-400 to-slate-500 p-4 sm:p-6 rounded-3xl shadow-2xl max-w-lg relative mr-16 sm:mr-24">
+        <div className="bg-linear-to-r from-slate-400 to-slate-500 p-4 sm:p-6 rounded-3xl shadow-2xl max-w-lg relative mr-20 sm:mr-28">
             <p className="text-white font-bold font-patrick text-base sm:text-lg">
                 {displayedText}
                 {displayedText.length < message.length && (
@@ -51,12 +52,12 @@ function Navigate({ onCardClick }) {
                 )}
             </p>
 
-            {/* SPEECH BUBBLE POINTER SECTION */}
-            <div className="absolute -right-3 sm:-right-4 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-10 sm:border-t-12 border-b-10 sm:border-b-12 border-l-12 sm:border-l-16 border-t-transparent border-b-transparent border-l-slate-500"></div>
+            {/* SPEECH BUBBLE POINTER */}
+            <div className="absolute -right-2 sm:-right-3 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-10 sm:border-t-12 border-b-10 sm:border-b-12 border-l-12 sm:border-l-18 border-t-transparent border-b-transparent border-l-slate-500"></div>
         </div>
         
-        {/* VIPO CHARACTER POSITION SECTION */}
-        <div className="absolute -bottom-4 sm:-bottom-2 right-0 sm:right-4">
+        {/* VIPO CHARACTER */}
+        <div className="absolute -bottom-4 sm:-bottom-2 right-2 sm:right-4 ml-2 sm:ml-8">
             <img
                 src="vipo/vipo.png"
                 alt="Vipo Mascot"

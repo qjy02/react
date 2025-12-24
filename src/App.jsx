@@ -1,12 +1,12 @@
+// App.jsx
 import './style.css';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Layout from './layout';
 import Hello from './hello';
 import Navigate from './navigate';
 import MemoryGame from './memorygame';
 
-// Create a wrapper component that has access to navigate
 function NavigateWithNavigation() {
   const navigate = useNavigate();
   
@@ -20,20 +20,32 @@ function NavigateWithNavigation() {
 }
 
 function App() {
-  const [introDone, setIntroDone] = useState(false);
+  const [introDone, setIntroDone] = useState(() => {
+    const hash = window.location.hash;
+    return hash === '#/memory-game';
+  });
 
-  // Set basename for GitHub Pages compatibility
-  // In development, use '/', in production use '/react/'
-  const basename = import.meta.env.PROD ? '/react' : '/';
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === '#/') {
+        setIntroDone(false);
+      } else if (hash === '#/memory-game') {
+        setIntroDone(true);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   return (
-    <Router basename={basename}> {/* BASENAME DEFINITION*/}
+    <Router>
       <Layout>
         <div className="flex-1 flex flex-col items-center justify-center">
           <Routes>
-            {/* Intro route */}
             <Route 
-              path="*" 
+              path="/" 
               element={
                 !introDone ? (
                   <Hello onFinish={() => setIntroDone(true)} />
@@ -43,16 +55,9 @@ function App() {
               } 
             />
             
-            {/* MEMORY GAME ROUTE SECTION */}
             <Route 
               path="/memory-game" 
-              element={
-                introDone ? (
-                  <MemoryGame />
-                ) : (
-                  <Hello onFinish={() => setIntroDone(true)} />
-                )
-              } 
+              element={<MemoryGame />}
             />
           </Routes>
         </div>
