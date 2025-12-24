@@ -1,37 +1,45 @@
-# React Project
-This is a simple React project that includes a header and footer component with custom styling.
+<div align="center">
+  
+# Vipo Playground
+  
+<img src="https://github.com/qjy02/react/raw/main/public/vipo/vipo_excited.png" alt="Vipo Mascot" width="120" />
 
-Link: https://qjy02.github.io/react/
+An interactive web playground featuring fun games with Vipo, my virtual mascot companion.  
+Built with React, Vite, and Tailwind CSS.
 
-## Components
-- **Header**: A header component styled with a gradient background and shadow effects.
-- **Footer**: A footer component styled similarly to the header.
+![React](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react)
+![Vite](https://img.shields.io/badge/Vite-5.0.0-646CFF?logo=vite)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.0-06B6D4?logo=tailwindcss)
 
-## Styling
-The project uses CSS variables for consistent theming, including colors for backgrounds, text, and shadows across the components.
-The styles are defined in `style.css` and applied to the header and footer components.
+**[🌐 Live Demo](https://qjy02.github.io/react/)** | **[📂 Source Code](https://github.com/qjy02/react)**
 
-## Usage
-To use the components, simply import them into your React application and include them in your JSX.
-```jsx
-import Header from './header';
-import Footer from './footer';
-function App() {
-  return (
-    <div>
-      <Header />
-      {/* Your main content goes here */}
-      <Footer />
-    </div>
-  );
-}
-export default App;
-```
+</div>
 
-## Installation
-1. Clone the repository.
-2. Install dependencies using `npm install`.
-3. Start the development server with `npm start`.
+## 🎯 About This Project
 
-## License
-This project is licensed under the MIT License.
+This is my first React project! As someone with zero React experience, I built this playground to learn how React, Vite, and Tailwind CSS work together to create interactive web applications. 
+
+The project started as a learning exercise and evolved into a fun collection of games featuring Vipo, a robot mascot created using Nano Banana 🍌, Gemini AI.
+
+## ✨ Features
+
+### 🎮 Interactive Games
+- **Memory Game**: Match animal emoji cards in this classic memory challenge
+- **More Coming Soon**: Tic Tac Toe and other mini-games in development
+
+## 🚀 Quick Start
+
+### Try It Online
+Visit **[https://qjy02.github.io/react/](https://qjy02.github.io/react/)** to play immediately!
+
+### Run Locally
+```bash
+# Clone the repository
+git clone https://github.com/qjy02/react.git
+cd react
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
