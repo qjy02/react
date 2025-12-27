@@ -455,7 +455,7 @@ function TicTacToe() {
                 <button
                   onClick={() => {
                     if (window.confirm('Return to home page? Your current game will be lost.')) {
-                      window.location.href = '/';
+                      window.location.href = '/react/';
                     }
                   }}
                   className="flex-1 px-6 py-3 bg-linear-to-r from-slate-100 to-slate-200 
