@@ -40,7 +40,7 @@ Please change the parent <Route path="${G}"> to <Route path="${G==="/"?"*":`${G}
                            active:shadow-[0_2px_0_0_rgba(59,130,246,0.8)] \r
                            active:translate-y-0.5 transform transition-all duration-200 \r
                            hover:-translate-y-0.5 cursor-pointer \r
-                           border-b-4 border-blue-600 hover:border-blue-700 text-center`,children:"Play Again"}),d.jsx("button",{onClick:()=>{window.confirm("Return to home page? Your current game will be lost.")&&(window.location.href="/")},className:`flex-1 px-6 py-3 bg-linear-to-r from-slate-100 to-slate-200 \r
+                           border-b-4 border-blue-600 hover:border-blue-700 text-center`,children:"Play Again"}),d.jsx("button",{onClick:()=>{window.confirm("Return to home page? Your current game will be lost.")&&(window.location.href="/react/")},className:`flex-1 px-6 py-3 bg-linear-to-r from-slate-100 to-slate-200 \r
                            text-slate-700 font-bold font-patrick rounded-full \r
                            shadow-[0_4px_0_0_rgba(148,163,184,0.8)] \r
                            hover:shadow-[0_4px_0_0_rgba(148,163,184,0.8),0_8px_16px_rgba(0,0,0,0.1)] \r
