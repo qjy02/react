@@ -339,9 +339,11 @@ function Dictionary() {
                     className="p-2 rounded-full font-patrick text-white transition-transform duration-200 flex items-center justify-center cursor-pointer
                                 hover:scale-110 active:scale-95"
                     >
-                    <span className="text-2xl text-blue-500">
-                        {isPlaying ? '⏸' : '🔊'}
-                    </span>
+                        <span className="text-2xl text-blue-500">
+                            {isPlaying ? '⏸' : (
+                                <span className="scale-x-[-1] inline-block">🔊</span>
+                            )}
+                        </span>
                     </button>
 
                     <img 
