@@ -2,9 +2,11 @@
 const BASE_PATH = '/react';
 
 export const paths = {
+  // Define paths for different pages
   home: `${BASE_PATH}/`,
   memoryGame: `${BASE_PATH}/memory_game`,
-  // Add more paths as needed
+  ticTacToe: `${BASE_PATH}/tictactoe`,
+  dictionary: `${BASE_PATH}/dictionary`,
 };
 
 // Helper function to navigate

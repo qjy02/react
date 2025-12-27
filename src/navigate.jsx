@@ -5,32 +5,47 @@ import './style.css';
 function Navigate({ onCardClick }) {
   const cards = [
     { id: 1, title: 'Memory Game', image: 'card/memory_game.png', page: 'memorygame', path: paths.memoryGame },
-    { id: 2, title: 'Tic Tac Toe', image: 'card/tictactoe.png', page: '', path: '' },
-    { id: 3, title: '???', image: 'vipo/vipo_excited.png', page: '', path: '' },
-    { id: 4, title: '???', image: 'vipo/vipo_sad.png', page: '', path: '' },
-    { id: 5, title: '???', image: 'vipo/vipo_angry.png', page: '', path: '' },
+    { id: 2, title: 'Tic Tac Toe', image: 'card/tictactoe.png', page: 'tictactoe', path: paths.ticTacToe },
+    { id: 3, title: 'Dictionary', image: 'card/dictionary.png', page: 'dictionary', path: paths.dictionary },
+    { id: 4, title: 'Music Player', image: 'card/musicplayer.png', page: '', path: '' },
+    { id: 5, title: 'Photo Booth', image: 'card/photobooth.png', page: '', path: '' },
     { id: 6, title: '???', image: 'vipo/vipo_shocked.png', page: '', path: '' },
-    { id: 7, title: '???', image: 'vipo/vipo_excited.png', page: '', path: '' },
-    { id: 8, title: '???', image: 'vipo/vipo_sad.png', page: '', path: '' },
+    { id: 7, title: '???', image: 'vipo/vipo_confused.png', page: '', path: '' },
+    { id: 8, title: '???', image: 'vipo/vipo_sleepy.png', page: '', path: '' },
   ];
 
-  const message = "Welcome! What do you want to play with Vipo today?";
+  const message = "Welcome! Let's play together ~ ";
   const [displayedText, setDisplayedText] = useState('');
   const [showGrid, setShowGrid] = useState(false);
+  const [showExcitedVipo, setShowExcitedVipo] = useState(false); // Start with normal face
 
   useEffect(() => {
     let index = 0;
-    const interval = setInterval(() => {
+    
+    // Add a small delay before starting the typing animation
+    const startDelay = setTimeout(() => {
+      // Switch to excited face when typing starts (after delay)
+      setShowExcitedVipo(true);
+      
+      const interval = setInterval(() => {
         index++;
         setDisplayedText(message.slice(0, index));
+        
         if (index >= message.length) {
           clearInterval(interval);
+          // Switch back to normal face when text is complete
+          setShowExcitedVipo(false);
           // Show grid after text animation completes
           setTimeout(() => setShowGrid(true), 300);
         }
-    }, 50);
+      }, 50);
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }, 500); // 500ms delay before typing starts
+
+    return () => {
+      clearTimeout(startDelay);
+    };
   }, [message]);
 
   const handleCardClick = (card) => {
@@ -58,11 +73,11 @@ function Navigate({ onCardClick }) {
         
         {/* VIPO CHARACTER */}
         <div className="absolute -bottom-4 sm:-bottom-2 right-2 sm:right-4 ml-2 sm:ml-8">
-            <img
-                src="vipo/vipo.png"
-                alt="Vipo Mascot"
-                className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-lg"
-            />
+          <img
+            src={showExcitedVipo ? "vipo/vipo_excited.png" : "vipo/vipo.png"}
+            alt="Vipo Mascot"
+            className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-lg transition-all duration-200"
+          />
         </div>
       </div>
 

@@ -5,14 +5,25 @@ import { useState, useEffect } from 'react';
 import Layout from './layout';
 import Hello from './hello';
 import Navigate from './navigate';
+
+// Vipo Playground Imports
 import MemoryGame from './memorygame';
+import TicTacToe from './tictactoe';
+import Dictionary from './dictionary';  
 
 function NavigateWithNavigation() {
   const navigate = useNavigate();
-  
+
+  // Handle card click to navigate to different pages
   const handleCardClick = (page) => {
     if (page === 'memorygame') {
-      navigate('/memory-game');
+      navigate('/memory_game');
+    }
+    else if (page === 'tictactoe') {
+      navigate('/tictactoe');
+    }
+    else if (page === 'dictionary') {
+      navigate('/dictionary');
     }
   };
   
@@ -22,7 +33,7 @@ function NavigateWithNavigation() {
 function App() {
   const [introDone, setIntroDone] = useState(() => {
     const hash = window.location.hash;
-    return hash === '#/memory-game';
+    return hash === '#/memory_game';
   });
 
   useEffect(() => {
@@ -30,7 +41,7 @@ function App() {
       const hash = window.location.hash;
       if (hash === '#/') {
         setIntroDone(false);
-      } else if (hash === '#/memory-game') {
+      } else if (hash === '#/memory_game') {
         setIntroDone(true);
       }
     };
@@ -44,6 +55,7 @@ function App() {
       <Layout>
         <div className="flex-1 flex flex-col items-center justify-center">
           <Routes>
+            { /* HOME / NAVIGATE */ }
             <Route 
               path="/" 
               element={
@@ -55,9 +67,22 @@ function App() {
               } 
             />
             
+            { /* MEMORY GAME */ }
             <Route 
-              path="/memory-game" 
+              path="/memory_game" 
               element={<MemoryGame />}
+            />
+
+            { /* TIC TAC TOE */ }
+            <Route
+              path="/tictactoe"
+              element={<TicTacToe />}
+            />
+
+            { /* DICTIONARY */ }  
+            <Route
+              path="/dictionary"
+              element={<Dictionary />}
             />
           </Routes>
         </div>

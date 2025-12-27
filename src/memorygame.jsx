@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './style.css';
 
-// Card types with emojis
+// Card types with animal emojis
 const CARD_TYPES = [
   '🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼',
   '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔'
@@ -15,10 +15,14 @@ function MemoryGame() {
   const [gameComplete, setGameComplete] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showCongratsDialog, setShowCongratsDialog] = useState(false);
+  const [gameMode, setGameMode] = useState('hard'); // 'easy' or 'hard'
 
-  // Initialize game
-  const initializeGame = () => {
-    const cardPairs = [...CARD_TYPES.slice(0, 8), ...CARD_TYPES.slice(0, 8)];
+  // Initialize game based on linear
+  const initializeGame = (linear = gameMode) => {
+    const cardCount = linear === 'easy' ? 8 : 16;
+    const selectedCards = CARD_TYPES.slice(0, cardCount);
+    const cardPairs = [...selectedCards, ...selectedCards];
+    
     const shuffledCards = cardPairs
       .sort(() => Math.random() - 0.5)
       .map((type, index) => ({
@@ -98,18 +102,19 @@ function MemoryGame() {
 
   // Check if game is complete
   useEffect(() => {
-    if (matched.length === 8 && cards.length > 0) {
+    const totalPairs = gameMode === 'easy' ? 8 : 16;
+    if (matched.length === totalPairs && cards.length > 0) {
       setTimeout(() => {
         setGameComplete(true);
         setShowCongratsDialog(true);
       }, 500);
     }
-  }, [matched, cards.length]);
+  }, [matched, cards.length, gameMode]);
 
-  // Initialize game on first render
+  // Initialize game on first render or when linear changes
   useEffect(() => {
     initializeGame();
-  }, []);
+  }, [gameMode]);
 
   // Handle new game from dialog
   const handleNewGame = () => {
@@ -120,7 +125,8 @@ function MemoryGame() {
     <div className="mt-8 animate-[fadeInside_1s_ease-out_forwards] opacity-0 space-y-8 px-4 sm:px-6 pb-8 sm:pb-12 w-full max-w-6xl mx-auto font-patrick">
       {/* CONGRATS DIALOG */}
       {showCongratsDialog && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 animate-[fadeIn_0.3s_ease-out]">          <div className="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full animate-[slideUp_0.4s_ease-out] shadow-2xl relative overflow-hidden">
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 animate-[fadeIn_0.3s_ease-out]">
+          <div className="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full animate-[slideUp_0.4s_ease-out] shadow-2xl relative overflow-hidden">
             {/* BACKGROUND DECORATION */}
             <div className="absolute inset-0 bg-linear-to-br from-blue-50 to-cyan-50 opacity-70" />
             <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-200 rounded-full opacity-30" />
@@ -155,20 +161,20 @@ function MemoryGame() {
               {/* DIALOG ACTION SECTION */}
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
                 <button
-                    onClick={handleNewGame}
-                    className="flex-1 px-6 py-3 bg-linear-to-r from-blue-500 to-cyan-500 text-white font-bold font-patrick rounded-full shadow-[0_4px_0_0_rgba(59,130,246,0.8)] hover:shadow-[0_4px_0_0_rgba(59,130,246,0.8),0_8px_16px_rgba(0,0,0,0.2)] active:shadow-[0_2px_0_0_rgba(59,130,246,0.8)] active:translate-y-0.5 transform transition-all duration-200 hover:-translate-y-0.5 cursor-pointer border-b-4 border-blue-600 hover:border-blue-700 text-center"
+                  onClick={handleNewGame}
+                  className="flex-1 px-6 py-3 bg-linear-to-r from-blue-500 to-cyan-500 text-white font-bold font-patrick rounded-full shadow-[0_4px_0_0_rgba(59,130,246,0.8)] hover:shadow-[0_4px_0_0_rgba(59,130,246,0.8),0_8px_16px_rgba(0,0,0,0.2)] active:shadow-[0_2px_0_0_rgba(59,130,246,0.8)] active:translate-y-0.5 transform transition-all duration-200 hover:-translate-y-0.5 cursor-pointer border-b-4 border-blue-600 hover:border-blue-700 text-center"
                 >
-                    New Game
+                  New Game
                 </button>
                 <button
-                    onClick={() => {
-                        if (window.confirm('Return to home page? Your current game progress will be lost.')) {
-                        window.location.href = '/react/';
-                        }
-                    }}
-                    className="flex-1 px-6 py-3 bg-linear-to-r from-slate-100 to-slate-200 text-slate-700 font-bold font-patrick rounded-full shadow-[0_4px_0_0_rgba(148,163,184,0.8)] hover:shadow-[0_4px_0_0_rgba(148,163,184,0.8),0_8px_16px_rgba(0,0,0,0.1)] active:shadow-[0_2px_0_0_rgba(148,163,184,0.8)] active:translate-y-0.5 transform transition-all duration-200 hover:-translate-y-0.5 cursor-pointer border-b-4 border-slate-300 hover:border-slate-400 text-center"
-                    >
-                    Back to Home
+                  onClick={() => {
+                    if (window.confirm('Return to home page? Your current game progress will be lost.')) {
+                      window.location.href = '/react/';
+                    }
+                  }}
+                  className="flex-1 px-6 py-3 bg-linear-to-r from-slate-100 to-slate-200 text-slate-700 font-bold font-patrick rounded-full shadow-[0_4px_0_0_rgba(148,163,184,0.8)] hover:shadow-[0_4px_0_0_rgba(148,163,184,0.8),0_8px_16px_rgba(0,0,0,0.1)] active:shadow-[0_2px_0_0_rgba(148,163,184,0.8)] active:translate-y-0.5 transform transition-all duration-200 hover:-translate-y-0.5 cursor-pointer border-b-4 border-slate-300 hover:border-slate-400 text-center"
+                >
+                  Back to Home
                 </button>
               </div>
 
@@ -187,9 +193,6 @@ function MemoryGame() {
         <h2 className="text-3xl font-bold font-patrick text-slate-800 mb-4">
           Memory Game
         </h2>
-        <p className="text-slate-600 font-patrick text-lg mb-8">
-          Test your memory with Vipo! Match all the pairs to win.
-        </p>
         
         <div className="memory-theme rounded-2xl p-6 shadow-xl">
           {gameComplete && (
@@ -211,6 +214,46 @@ function MemoryGame() {
             </div>
           )}
 
+          {/* GAME MODE SELECTION */}
+          <div className="flex justify-center items-center mb-6">
+            <div className="bg-white rounded-lg shadow-md p-1 border border-blue-100 inline-flex">
+              <button
+                onClick={() => {
+                  if (moves > 0 && !gameComplete) {
+                    if (!window.confirm('You are in progress. Are you sure you want to switch mode? Your current game will be reset.')) {
+                      return;
+                    }
+                  }
+                  setGameMode('easy');
+                }}
+                className={`px-4 py-2 rounded-md font-bold font-patrick transition-all duration-200 cursor-pointer ${
+                  gameMode === 'easy'
+                    ? 'bg-linear-to-r from-green-500 to-emerald-500 text-white shadow-sm'
+                    : 'text-slate-600 hover:bg-blue-50'
+                }`}
+              >
+                Easy
+              </button>
+              <button
+                onClick={() => {
+                  if (moves > 0 && !gameComplete) {
+                    if (!window.confirm('You are in progress. Are you sure you want to switch mode? Your current game will be reset.')) {
+                      return;
+                    }
+                  }
+                  setGameMode('hard');
+                }}
+                className={`px-4 py-2 rounded-md font-bold font-patrick transition-all duration-200 cursor-pointer ${
+                  gameMode === 'hard'
+                    ? 'bg-linear-to-r from-red-500 to-orange-500 text-white shadow-sm'
+                    : 'text-slate-600 hover:bg-blue-50'
+                }`}
+              >
+                Hard
+              </button>
+            </div>
+          </div>
+
           {/* GAME STATS SECTION */}
           <div className="flex justify-center items-center gap-6 mb-8">
             <div className="bg-white px-4 py-2 rounded-lg shadow-md border border-blue-100">
@@ -219,14 +262,16 @@ function MemoryGame() {
             </div>
             <div className="bg-white px-4 py-2 rounded-lg shadow-md border border-blue-100">
               <p className="text-sm text-slate-500 font-patrick">Matches</p>
-              <p className="text-2xl font-bold text-blue-600 font-patrick">{matched.length}/8</p>
+              <p className="text-2xl font-bold text-blue-600 font-patrick">
+                {matched.length}/{gameMode === 'easy' ? 8 : 16}
+              </p>
             </div>
           </div>
 
           {/* GAME CONTROLS SECTION */}
           <div className="mb-8">
             <button
-              onClick={initializeGame}
+              onClick={() => initializeGame()}
               className="px-6 py-3 bg-linear-to-r from-blue-500 to-cyan-500 text-white font-bold font-patrick rounded-full shadow-[0_4px_0_0_rgba(59,130,246,0.8),0_8px_12px_rgba(0,0,0,0.2)] hover:shadow-[0_4px_0_0_rgba(59,130,246,0.8),0_12px_20px_rgba(0,0,0,0.3)] active:shadow-[0_2px_0_0_rgba(59,130,246,0.8)] active:translate-y-0.5 transform transition-all duration-200 hover:-translate-y-0.5 cursor-pointer border-b-4 border-blue-600 hover:border-blue-700"
             >
               🔄 New Game
@@ -234,7 +279,11 @@ function MemoryGame() {
           </div>
 
           {/* GAME BOARD SECTION */}
-          <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4 max-w-4xl mx-auto mb-8">
+          <div className={`grid gap-3 sm:gap-4 max-w-4xl mx-auto mb-8 ${
+            gameMode === 'easy' 
+              ? 'grid-cols-4 sm:grid-cols-4 md:grid-cols-8' 
+              : 'grid-cols-4 sm:grid-cols-4 md:grid-cols-8'
+          }`}>
             {cards.map(card => (
               <button
                 key={card.id}
@@ -260,7 +309,8 @@ function MemoryGame() {
                 {card.isFlipped || card.isMatched ? card.type : '?'}
                 
                 {card.isMatched && (
-                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent animate-shine"
+                  <div 
+                    className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent animate-shine"
                     style={{
                       backgroundSize: '200% 100%',
                       animation: 'shineEffect 1.5s ease-in-out infinite'
@@ -273,21 +323,42 @@ function MemoryGame() {
 
           {/* GAME INSTRUCTION SECTION */}
           <div className="mt-8 pt-6 border-t border-blue-200">
-            <h4 className="text-lg font-bold font-patrick text-blue-700 mb-2">
+            <h4 className="text-lg font-bold font-patrick text-blue-700 mb-4">
               How to Play:
             </h4>
-            <ul className="text-slate-800 font-patrick text-sm sm:text-base grid grid-cols-1 sm:grid-cols-3 gap-2 font-bold">
-              <li className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg">
-                <span className="bg-blue-100 text-slate-800 px-2 py-1 rounded">1</span>
-                Click on a card to flip it
+            <ul className="text-slate-800 font-patrick text-sm sm:text-base grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <li className="flex items-start sm:items-center gap-3 px-4 py-3 rounded-lg bg-blue-50">
+                <div className="flex items-center justify-center min-w-8">
+                  <span className="bg-blue-100 text-slate-800 w-8 h-8 flex items-center justify-center rounded-full font-bold text-lg">
+                    1
+                  </span>
+                </div>
+                <div className="text-left flex-1">
+                  <span className="font-bold block mb-1">Flip Cards</span>
+                  <span className="text-sm text-slate-600">Click on a card to reveal it</span>
+                </div>
               </li>
-              <li className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg">
-                <span className="bg-blue-100 text-slate-800 px-2 py-1 rounded">2</span>
-                Find matching pairs
+              <li className="flex items-start sm:items-center gap-3 px-4 py-3 rounded-lg bg-blue-50">
+                <div className="flex items-center justify-center min-w-8">
+                  <span className="bg-blue-100 text-slate-800 w-8 h-8 flex items-center justify-center rounded-full font-bold text-lg">
+                    2
+                  </span>
+                </div>
+                <div className="text-left flex-1">
+                  <span className="font-bold block mb-1">Find Matches</span>
+                  <span className="text-sm text-slate-600">Match two identical cards</span>
+                </div>
               </li>
-              <li className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg">
-                <span className="bg-blue-100 text-slate-800 px-2 py-1 rounded">3</span>
-                Complete with fewest moves!
+              <li className="flex items-start sm:items-center gap-3 px-4 py-3 rounded-lg bg-blue-50">
+                <div className="flex items-center justify-center min-w-8">
+                  <span className="bg-blue-100 text-slate-800 w-8 h-8 flex items-center justify-center rounded-full font-bold text-lg">
+                    3
+                  </span>
+                </div>
+                <div className="text-left flex-1">
+                  <span className="font-bold block mb-1">Complete Game</span>
+                  <span className="text-sm text-slate-600">Match all pairs with fewest moves!</span>
+                </div>
               </li>
             </ul>
           </div>

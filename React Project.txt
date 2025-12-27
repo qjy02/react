@@ -1,0 +1,112 @@
+React Project
+-----------------
+
+Start Localhost
+-----------------
+npm run dev
+npm run deploy
+
+Installation
+-----------------
+
+Install node.js
+
+node -v
+npm -v
+
+cd C:\Users\User\Documents\GitHub
+
+npm create vite@latest react <-- name can be anything, in this case I use react as my first project
+
+npm create vite@latest react
+
+framework: React
+variant: Javascript + React Compiler
+rolldown-vite: no
+install npm: yes
+
+cd C:\Users\User\Documents\GitHub\react
+npm install tailwindcss @tailwindcss/vite
+
+code .
+
+In VS Code: Ctrl+Shift+X
+Dowload Tailwind CSS Intelliscene
+
+vite.config.js
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+})
+
+In CSS
+@import "tailwindcss";
+
+npm run dev
+
+#GITHUB PAGES
+
+npm install gh-pages --save-dev
+npm run build
+
+package.json:
+{
+  "name": "react",
+  "private": true,
+  "homepage": "https://qjy02.github.io/react",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "autoprefixer": "^10.4.23",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "gh-pages": "^6.3.0",
+    "globals": "^16.5.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
+    "vite": "^7.2.4"
+  }
+}
+
+npm run deploy
+
+In Github Page Settings
+
+GitHub to look at the branch created by your npm run deploy command.
+
+Open your browser and go to: https://github.com/qjy02/react/settings/pages
+
+Look for the Build and deployment section.
+
+Under Branch, click the dropdown that currently says main.
+
+Select gh-pages from the list.
+
+Click the Save button.
