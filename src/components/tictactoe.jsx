@@ -425,10 +425,10 @@ function TicTacToe() {
                 {/* DIALOG VIPO SECTION */}
                 <div className="flex justify-center my-4">
                   <img
-                    src={`vipo/${
-                      dialogType === 'win' ? 'vipo_excited' :
-                      dialogType === 'lose' ? 'vipo_speak' :
-                      'vipo_think'
+                    src={`mascot/${
+                      dialogType === 'win' ? 'win' :
+                      dialogType === 'lose' ? 'lose' :
+                      'draw'
                     }.png`}
                     alt="Vipo"
                     className="w-16 h-16"

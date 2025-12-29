@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import './style.css';
+import '../css/style.css';
 
 function Dictionary() {
   const [word, setWord] = useState('');

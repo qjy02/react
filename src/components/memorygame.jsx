@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './style.css';
+import '../css/style.css';
 
 // Card types with animal emojis
 const CARD_TYPES = [
@@ -15,7 +15,7 @@ function MemoryGame() {
   const [gameComplete, setGameComplete] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showCongratsDialog, setShowCongratsDialog] = useState(false);
-  const [gameMode, setGameMode] = useState('hard'); // 'easy' or 'hard'
+  const [gameMode, setGameMode] = useState('easy'); // 'easy' or 'hard'
 
   // Initialize game based on linear
   const initializeGame = (linear = gameMode) => {

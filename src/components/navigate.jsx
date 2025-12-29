@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { paths } from './utils/path';
-import './style.css';
+import { paths } from '../utils/path';
+import '../css/style.css';
 
 function Navigate({ onCardClick }) {
   const cards = [
     { id: 1, title: 'Memory Game', image: 'card/memory_game.png', page: 'memorygame', path: paths.memoryGame },
     { id: 2, title: 'Tic Tac Toe', image: 'card/tictactoe.png', page: 'tictactoe', path: paths.ticTacToe },
     { id: 3, title: 'Dictionary', image: 'card/dictionary.png', page: 'dictionary', path: paths.dictionary },
-    { id: 4, title: 'Music Player', image: 'card/musicplayer.png', page: '', path: '' },
+    { id: 4, title: 'Music Player', image: 'card/musicplayer.png', page: 'musicplayer', paths: paths.musicPlayer },
     { id: 5, title: 'Photo Booth', image: 'card/photobooth.png', page: '', path: '' },
     { id: 6, title: '???', image: 'vipo/vipo_shocked.png', page: '', path: '' },
     { id: 7, title: '???', image: 'vipo/vipo_confused.png', page: '', path: '' },
