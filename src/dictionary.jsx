@@ -197,16 +197,16 @@ function Dictionary() {
         </p>
       </div>
 
-      {/* MAIN CONTENT */}
+      {/* MAIN CONTENT SECTION */}
       <div className="bg-linear-to-br from-slate-50 to-blue-50 rounded-3xl shadow-2xl p-6 sm:p-8 border-2 border-slate-200 relative overflow-hidden">
-        {/* Book spine decoration */}
+        {/* BOOK SPINE DECORATION SECTION */}
         <div className="absolute left-0 top-0 bottom-0 w-4 bg-linear-to-b from-slate-700 via-slate-600 to-slate-800"></div>
         <div className="absolute left-4 top-0 bottom-0 w-2 bg-linear-to-b from-slate-900 to-slate-800"></div>
         
-        {/* Page curl effect */}
+        {/* PAGE CURL EFFECT SECTION */}
         <div className="absolute right-0 top-0 bottom-0 w-12 bg-linear-to-l from-white/20 to-transparent"></div>
 
-        {/* SEARCH SECTION */}
+        {/* SEARCH SECTION SECTION */}
         <div className="ml-8 mb-8">
           <form onSubmit={handleSearch} className="relative max-w-2xl mx-auto">
             <div className="relative">
@@ -229,7 +229,7 @@ function Dictionary() {
                 Search
               </button>
 
-              {/* AUTOCOMPLETE SUGGESTIONS */}
+              {/* AUTOCOMPLETE SUGGESTIONS SECTION */}
                 {showSuggestions && (
                 <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-2xl border border-slate-200 z-50 max-h-60 overflow-y-auto">
                     {loadingSuggestions ? (
@@ -266,7 +266,7 @@ function Dictionary() {
                 )}
             </div>
             
-            {/* POPULAR SEARCHES */}
+            {/* POPULAR SEARCHES SECTION */}
             <div className="mt-4">
               <p className="text-slate-600 font-patrick mb-2">Popular searches:</p>
               <div className="flex flex-wrap gap-2">
@@ -284,7 +284,7 @@ function Dictionary() {
           </form>
         </div>
 
-        {/* LOADING STATE */}
+        {/* LOADING STATE SECTION */}
         {loading && (
           <div className="ml-8 text-center py-12">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
@@ -292,7 +292,7 @@ function Dictionary() {
           </div>
         )}
 
-        {/* ERROR STATE */}
+        {/* ERROR STATE SECTION */}
         {error && !loading && (
         <div className="flex flex-col items-center justify-center">
             <div className="max-w-2xl w-full bg-linear-to-r from-red-50 to-pink-50 border-2 border-red-200 rounded-2xl p-6 text-center">
@@ -308,13 +308,13 @@ function Dictionary() {
         </div>
         )}
 
-        {/* DICTIONARY RESULTS */}
+        {/* DICTIONARY RESULTS SECTION */}
         {definitions && !loading && !error && (
           <div className="ml-8 space-y-8 animate-[slideUp_0.5s_ease-out]">
-            {/* WORD HEADER */}
+            {/* WORD HEADER SECTION */}
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-slate-100">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
+                <div className="flex-1"> {/* Added flex-1 to take available space */}
                   <h2 className="text-3xl sm:text-4xl font-bold font-patrick text-slate-800 mb-2">
                     {definitions.word}
                   </h2>
@@ -331,9 +331,9 @@ function Dictionary() {
                   )}
                 </div>
                 
-                {/* SINGLE AUDIO BUTTON */}
+                {/* SINGLE AUDIO BUTTON SECTION */}
                 {getAudioUrl() && (
-                <div className="flex gap-2 items-center">
+                <div className="flex gap-2 items-center self-end sm:self-auto">
                     <button
                     onClick={toggleAudio}
                     className="p-2 rounded-full font-patrick text-white transition-transform duration-200 flex items-center justify-center cursor-pointer
@@ -356,21 +356,21 @@ function Dictionary() {
               </div>
             </div>
 
-            {/* MEANINGS */}
+            {/* MEANINGS SECTION */}
             <div className="space-y-6">
               {definitions.meanings?.map((meaning, index) => (
                 <div 
                   key={index}
                   className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-slate-100"
                 >
-                  {/* PART OF SPEECH */}
+                  {/* PART OF SPEECH SECTION */}
                   <div className="mb-4">
                     <span className="inline-block px-4 py-1.5 bg-linear-to-r from-blue-500 to-cyan-500 text-white font-bold font-patrick rounded-full text-sm cursor-default">
                       {meaning.partOfSpeech}
                     </span>
                   </div>
 
-                  {/* DEFINITIONS */}
+                  {/* DEFINITIONS SECTION */}
                   <div className="space-y-4">
                     {meaning.definitions?.map((definition, defIndex) => (
                       <div key={defIndex} className="pl-4 border-l-4 border-blue-300">
@@ -391,7 +391,7 @@ function Dictionary() {
                               </div>
                             )}
 
-                            {/* SYNONYMS */}
+                            {/* SYNONYMS SECTION */}
                             {definition.synonyms?.length > 0 && (
                               <div className="mt-3">
                                 <p className="text-sm text-slate-500 font-patrick mb-1">Synonyms:</p>
@@ -408,7 +408,7 @@ function Dictionary() {
                               </div>
                             )}
 
-                            {/* ANTONYMS */}
+                            {/* ANTONYMS SECTION */}
                             {definition.antonyms?.length > 0 && (
                               <div className="mt-3">
                                 <p className="text-sm text-slate-500 font-patrick mb-1">Antonyms:</p>
@@ -433,9 +433,9 @@ function Dictionary() {
               ))}
             </div>
 
-            {/* ADDITIONAL INFORMATION */}
+            {/* ADDITIONAL INFORMATION SECTION */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* PHONETICS */}
+              {/* PHONETICS SECTION */}
               {definitions.phonetics?.length > 0 && (
                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-slate-100">
                   <h3 className="text-xl font-bold font-patrick text-slate-800 mb-4">Phonetics</h3>
@@ -499,7 +499,7 @@ function Dictionary() {
                 </div>
               )}
 
-              {/* SEARCH HISTORY */}
+              {/* SEARCH HISTORY SECTION */}
                 {searchHistory.length > 0 && (
                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-slate-100">
                     <h3 className="text-xl font-bold font-patrick text-slate-800 mb-4">Your Search History</h3>
@@ -525,7 +525,7 @@ function Dictionary() {
           </div>
         )}
 
-        {/* DEFAULT STATE */}
+        {/* DEFAULT STATE SECTION */}
         {!definitions && !loading && !error && (
           <div className="ml-8 text-center py-12">
             <div className="text-6xl mb-6">📖</div>
@@ -538,7 +538,7 @@ function Dictionary() {
           </div>
         )}
 
-        {/* FOOTER TIPS */}
+        {/* FOOTER TIPS SECTION */}
         <div className="ml-8 mt-8 pt-6 border-t border-slate-200">
           <h4 className="text-lg font-bold font-patrick text-blue-700 mb-4">
             💡 Dictionary Tips:

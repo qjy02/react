@@ -123,7 +123,7 @@ function MemoryGame() {
 
   return (
     <div className="mt-8 animate-[fadeInside_1s_ease-out_forwards] opacity-0 space-y-8 px-4 sm:px-6 pb-8 sm:pb-12 w-full max-w-6xl mx-auto font-patrick">
-      {/* CONGRATS DIALOG */}
+      {/* CONGRATS DIALOG SECTION */}
       {showCongratsDialog && (
         <div className="fixed inset-0 flex items-center justify-center z-50 p-4 animate-[fadeIn_0.3s_ease-out]">
           <div className="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full animate-[slideUp_0.4s_ease-out] shadow-2xl relative overflow-hidden">
@@ -214,7 +214,7 @@ function MemoryGame() {
             </div>
           )}
 
-          {/* GAME MODE SELECTION */}
+          {/* GAME MODE SELECTION SECTION */}
           <div className="flex justify-center items-center mb-6">
             <div className="bg-white rounded-lg shadow-md p-1 border border-blue-100 inline-flex">
               <button

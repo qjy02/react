@@ -250,7 +250,7 @@ function TicTacToe() {
     }
     };
 
-    // Reset game (called from dialog)
+    // Reset game
     const resetGame = () => {
     setBoard(Array(9).fill(null));
     setXIsNext(true);
@@ -292,22 +292,23 @@ function TicTacToe() {
   };
 
   return (
-    <div className="min-h-screen background-theme-with-image pt-8 pb-12 px-4 sm:px-6 flex flex-col items-center justify-center">
-      <div className="w-full max-w-2xl mx-auto">
-        {/* Game Title at the very top */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl sm:text-5xl font-patrick font-bold text-slate-800 mb-2">
-            Tic Tac Toe
-          </h1>
-          <p className="text-slate-600 font-patrick text-lg">
-            Play against Vipo!
-          </p>
-        </div>
+    <div className="min-h-screen background-theme-with-image pt-8 pb-12 px-4 sm:px-6 flex flex-col items-center">
+      {/* GAME TITLE SECTION */}
+      <div className="text-center pt-4 pb-2 w-full">
+        <h1 className="text-4xl sm:text-5xl font-patrick font-bold text-slate-800 mb-2">
+          Tic Tac Toe
+        </h1>
+        <p className="text-slate-600 font-patrick text-lg">
+          Play against Vipo!
+        </p>
+      </div>
 
-        {/* Speech Bubble and Vipo */}
+      {/* MAIN CONTENT CONTAINER SECTION */}
+      <div className="w-full max-w-2xl mx-auto mt-auto mb-auto">
+        {/* SPEECH BUBBLE AND VIPO SECTION */}
         <div className="mb-8 sm:mb-12">
           <div className="relative animate-[fadeIn_1s_ease-out_forwards]">
-            {/* Speech Bubble Container */}
+            {/* SPEECH BUBBLE CONTAINER SECTION */}
             <div className="bg-linear-to-r from-slate-400 to-slate-500 p-4 sm:p-6 rounded-3xl shadow-2xl max-w-lg relative mr-20 sm:mr-28 min-h-20 flex items-center">
               <p className="text-white font-bold font-patrick text-base sm:text-lg w-full">
                 {displayedText || '\u00A0'}
@@ -316,11 +317,11 @@ function TicTacToe() {
                 )}
               </p>
 
-              {/* Speech Bubble Pointer */}
+              {/* SPEECH BUBBLE POINTER SECTION */}
               <div className="absolute -right-2 sm:-right-3 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-10 sm:border-t-12 border-b-10 sm:border-b-12 border-l-12 sm:border-l-18 border-t-transparent border-b-transparent border-l-slate-500"></div>
             </div>
             
-            {/* Vipo Character with different expressions */}
+            {/* VIPO CHARACTER SECTION */}
             <div className="absolute -bottom-4 sm:-bottom-2 right-2 sm:right-4 ml-2 sm:ml-8">
               <img
                 src={`vipo/${vipoExpression}.png`}
@@ -331,9 +332,8 @@ function TicTacToe() {
           </div>
         </div>
 
-        {/* Game Board */}
+        {/* GAME BOARD SECTION */}
         <div className="flex flex-col items-center">
-          {/* Game Board */}
           <div className="bg-linear-to-br from-blue-50 to-indigo-50 
                         rounded-2xl p-6 sm:p-8 shadow-xl border-3 border-blue-100 
                         mb-8 w-full">
@@ -346,7 +346,7 @@ function TicTacToe() {
             </div>
           </div>
 
-          {/* Simple Legend (No Reset Button) */}
+          {/* INTRODUCTION SECTION */}
           <div className="flex items-center justify-center gap-8 mb-6">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 bg-blue-100 border-2 
@@ -422,7 +422,7 @@ function TicTacToe() {
                   {dialogType === 'draw' && "The game ended in a tie!"}
                 </p>
                 
-                {/* Show Vipo mini image in dialog */}
+                {/* DIALOG VIPO SECTION */}
                 <div className="flex justify-center my-4">
                   <img
                     src={`vipo/${
@@ -441,13 +441,13 @@ function TicTacToe() {
                 <button
                   onClick={resetGame}
                   className="flex-1 px-6 py-3 bg-linear-to-r from-blue-500 to-indigo-500 
-                           text-white font-bold font-patrick rounded-full 
-                           shadow-[0_4px_0_0_rgba(59,130,246,0.8)] 
-                           hover:shadow-[0_4px_0_0_rgba(59,130,246,0.8),0_8px_16px_rgba(0,0,0,0.2)] 
-                           active:shadow-[0_2px_0_0_rgba(59,130,246,0.8)] 
-                           active:translate-y-0.5 transform transition-all duration-200 
-                           hover:-translate-y-0.5 cursor-pointer 
-                           border-b-4 border-blue-600 hover:border-blue-700 text-center"
+                          text-white font-bold font-patrick rounded-full 
+                          shadow-[0_4px_0_0_rgba(59,130,246,0.8)] 
+                          hover:shadow-[0_4px_0_0_rgba(59,130,246,0.8),0_8px_16px_rgba(0,0,0,0.2)] 
+                          active:shadow-[0_2px_0_0_rgba(59,130,246,0.8)] 
+                          active:translate-y-0.5 transform transition-all duration-200 
+                          hover:-translate-y-0.5 cursor-pointer 
+                          border-b-4 border-blue-600 hover:border-blue-700 text-center"
                 >
                   Play Again
                 </button>
@@ -459,13 +459,13 @@ function TicTacToe() {
                     }
                   }}
                   className="flex-1 px-6 py-3 bg-linear-to-r from-slate-100 to-slate-200 
-                           text-slate-700 font-bold font-patrick rounded-full 
-                           shadow-[0_4px_0_0_rgba(148,163,184,0.8)] 
-                           hover:shadow-[0_4px_0_0_rgba(148,163,184,0.8),0_8px_16px_rgba(0,0,0,0.1)] 
-                           active:shadow-[0_2px_0_0_rgba(148,163,184,0.8)] 
-                           active:translate-y-0.5 transform transition-all duration-200 
-                           hover:-translate-y-0.5 cursor-pointer 
-                           border-b-4 border-slate-300 hover:border-slate-400 text-center"
+                          text-slate-700 font-bold font-patrick rounded-full 
+                          shadow-[0_4px_0_0_rgba(148,163,184,0.8)] 
+                          hover:shadow-[0_4px_0_0_rgba(148,163,184,0.8),0_8px_16px_rgba(0,0,0,0.1)] 
+                          active:shadow-[0_2px_0_0_rgba(148,163,184,0.8)] 
+                          active:translate-y-0.5 transform transition-all duration-200 
+                          hover:-translate-y-0.5 cursor-pointer 
+                          border-b-4 border-slate-300 hover:border-slate-400 text-center"
                 >
                   Back to Home
                 </button>

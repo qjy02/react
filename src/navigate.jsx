@@ -56,7 +56,7 @@ function Navigate({ onCardClick }) {
 
  return (
     <div className="mt-8 space-y-8 px-4 sm:px-6 pb-8 sm:pb-12">
-      {/* Speech BUBBLE SECTION */}
+      {/* SPEECH BUBBLE SECTION */}
       <div className="relative animate-[fadeIn_1s_ease-out_forwards] opacity-0">
         {/* SPEECH BUBBLE CONTAINER */}
         <div className="bg-linear-to-r from-slate-400 to-slate-500 p-4 sm:p-6 rounded-3xl shadow-2xl max-w-lg relative mr-20 sm:mr-28">
@@ -67,11 +67,11 @@ function Navigate({ onCardClick }) {
                 )}
             </p>
 
-            {/* SPEECH BUBBLE POINTER */}
+            {/* SPEECH BUBBLE POINTER SECTION */}
             <div className="absolute -right-2 sm:-right-3 top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-10 sm:border-t-12 border-b-10 sm:border-b-12 border-l-12 sm:border-l-18 border-t-transparent border-b-transparent border-l-slate-500"></div>
         </div>
         
-        {/* VIPO CHARACTER */}
+        {/* VIPO CHARACTER SECTION */}
         <div className="absolute -bottom-4 sm:-bottom-2 right-2 sm:right-4 ml-2 sm:ml-8">
           <img
             src={showExcitedVipo ? "vipo/vipo_excited.png" : "vipo/vipo.png"}
