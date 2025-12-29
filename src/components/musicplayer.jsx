@@ -28,9 +28,14 @@ function MusicPlayer() {
     album: 'Unknown Album'
   });
 
+  const [isFlipped, setIsFlipped] = useState(false);
   const audioRef = useRef(null);
   const albumArtRef = useRef(null);
   const progressBarRef = useRef(null);
+
+  const handleImageFlip = () => {
+    setIsFlipped(!isFlipped);
+  };
 
   // Format time to MM:SS
   const formatTime = (seconds) => {
@@ -252,14 +257,18 @@ function MusicPlayer() {
         
         {/* ALBUM ART SECTION */}
         <div className="flex justify-center mb-6 sm:mb-8">
-          <div className="relative w-full max-w-64 sm:max-w-80 aspect-square rounded-2xl overflow-hidden shadow-2xl">
+          <div 
+            className="relative w-full max-w-64 sm:max-w-80 aspect-square rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+            onClick={handleImageFlip}
+          >
             <img
               ref={albumArtRef}
               src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
               alt="Album Art"
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              className={`w-full h-full object-cover transition-transform duration-300 ${isFlipped ? 'scale-x-[-1]' : ''}`}
             />
-            <div className="absolute inset-0 bg-linear-to-t from-slate-900/50 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-slate-600/50 to-transparent"></div>
+            
           </div>
         </div>
 

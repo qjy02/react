@@ -331,5 +331,3 @@ button:not(:disabled):hover {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-thumb-hover);
 }
-
-/* MUSIC PLAYER SECTION */
