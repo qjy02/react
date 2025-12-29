@@ -13,6 +13,7 @@ function Dictionary() {
   const [loadingSuggestions, setLoadingSuggestions] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playingPhonetic, setPlayingPhonetic] = useState(null);
+  const [expandedParts, setExpandedParts] = useState({});
   const phoneticAudioRef = useRef(null);
   const audioRef = useRef(null);
 
@@ -52,6 +53,7 @@ function Dictionary() {
     setLoading(true);
     setError(null);
     setIsPlaying(false);
+    setExpandedParts({});
     
     // Stop any playing audio
     if (audioRef.current) {
@@ -357,81 +359,125 @@ function Dictionary() {
             </div>
 
             {/* MEANINGS SECTION */}
-            <div className="space-y-6">
-              {definitions.meanings?.map((meaning, index) => (
-                <div 
-                  key={index}
-                  className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-slate-100"
-                >
-                  {/* PART OF SPEECH SECTION */}
-                  <div className="mb-4">
-                    <span className="inline-block px-4 py-1.5 bg-linear-to-r from-blue-500 to-cyan-500 text-white font-bold font-patrick rounded-full text-sm cursor-default">
-                      {meaning.partOfSpeech}
-                    </span>
-                  </div>
-
-                  {/* DEFINITIONS SECTION */}
-                  <div className="space-y-4">
-                    {meaning.definitions?.map((definition, defIndex) => (
-                      <div key={defIndex} className="pl-4 border-l-4 border-blue-300">
-                        <div className="flex items-start gap-3">
-                          <span className="inline-flex items-center justify-center min-w-6 h-6 bg-blue-100 text-blue-800 rounded-full text-sm font-bold cursor-default">
-                            {defIndex + 1}
+            {definitions.meanings?.length > 0 && (
+              <div className="space-y-6">
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-slate-100">
+                  <h3 className="text-2xl font-bold font-patrick text-slate-800 mb-6">
+                    Definitions
+                  </h3>
+                  
+                  <div className="space-y-8">
+                    {definitions.meanings?.map((meaning, index) => (
+                      <div key={index} className="space-y-4">
+                        {/* PART OF SPEECH SECTION */}
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className="inline-block px-4 py-1.5 bg-linear-to-r from-blue-500 to-cyan-500 text-white font-bold font-patrick rounded-full text-sm cursor-default">
+                            {meaning.partOfSpeech}
                           </span>
-                          <div className="flex-1">
-                            <p className="text-slate-800 font-patrick text-lg mb-2">
-                              {definition.definition}
-                            </p>
-                            
-                            {definition.example && (
-                              <div className="ml-4 pl-4 border-l-2 border-blue-200">
-                                <p className="text-slate-600 font-patrick italic">
-                                  <span className="font-bold text-blue-600">Example:</span> "{definition.example}"
-                                </p>
-                              </div>
-                            )}
-
-                            {/* SYNONYMS SECTION */}
-                            {definition.synonyms?.length > 0 && (
-                              <div className="mt-3">
-                                <p className="text-sm text-slate-500 font-patrick mb-1">Synonyms:</p>
-                                <div className="flex flex-wrap gap-2">
-                                  {definition.synonyms.map((synonym, synIndex) => (
-                                    <span
-                                      key={synIndex}
-                                      className="px-3 py-1 bg-linear-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-lg text-emerald-700 font-patrick text-sm cursor-default"
-                                    >
-                                      {synonym}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-
-                            {/* ANTONYMS SECTION */}
-                            {definition.antonyms?.length > 0 && (
-                              <div className="mt-3">
-                                <p className="text-sm text-slate-500 font-patrick mb-1">Antonyms:</p>
-                                <div className="flex flex-wrap gap-2">
-                                  {definition.antonyms.map((antonym, antIndex) => (
-                                    <span
-                                      key={antIndex}
-                                      className="px-3 py-1 bg-linear-to-r from-rose-50 to-pink-50 border border-rose-200 rounded-lg text-rose-700 font-patrick text-sm cursor-default"
-                                    >
-                                      {antonym}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-                          </div>
+                          <div className="h-px flex-1 bg-linear-to-r from-blue-200 to-transparent"></div>
                         </div>
+
+                        {/* DEFINITIONS SECTION */}
+                        <div className="space-y-4 ml-2">
+                          {meaning.definitions?.slice(0, expandedParts[meaning.partOfSpeech] ? meaning.definitions.length : 3).map((definition, defIndex) => (
+                            <div key={defIndex} className="pl-4 border-l-3 border-blue-300">
+                              <div className="flex items-start gap-3">
+                                <span className="inline-flex items-center justify-center min-w-6 h-6 bg-blue-100 text-blue-800 rounded-full text-sm font-bold cursor-default mt-1">
+                                  {defIndex + 1}
+                                </span>
+                                <div className="flex-1">
+                                  <p className="text-slate-800 font-patrick text-lg mb-2">
+                                    {definition.definition}
+                                  </p>
+                                  
+                                  {definition.example && (
+                                    <div className="ml-4 pl-4 border-l-2 border-blue-200">
+                                      <p className="text-slate-600 font-patrick italic">
+                                        <span className="font-bold text-blue-600">Example:</span> "{definition.example}"
+                                      </p>
+                                    </div>
+                                  )}
+
+                                  {/* SYNONYMS SECTION */}
+                                  {definition.synonyms?.length > 0 && (
+                                    <div className="mt-3">
+                                      <p className="text-sm text-slate-500 font-patrick mb-1">Synonyms:</p>
+                                      <div className="flex flex-wrap gap-2">
+                                        {definition.synonyms.slice(0, 5).map((synonym, synIndex) => (
+                                          <span
+                                            key={synIndex}
+                                            className="px-3 py-1 bg-linear-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-lg text-emerald-700 font-patrick text-sm cursor-default"
+                                          >
+                                            {synonym}
+                                          </span>
+                                        ))}
+                                        {definition.synonyms.length > 5 && (
+                                          <span className="px-3 py-1 bg-emerald-100 border border-emerald-300 rounded-lg text-emerald-800 font-patrick text-sm cursor-default">
+                                            +{definition.synonyms.length - 5} more
+                                          </span>
+                                        )}
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {/* ANTONYMS SECTION */}
+                                  {definition.antonyms?.length > 0 && (
+                                    <div className="mt-3">
+                                      <p className="text-sm text-slate-500 font-patrick mb-1">Antonyms:</p>
+                                      <div className="flex flex-wrap gap-2">
+                                        {definition.antonyms.slice(0, 5).map((antonym, antIndex) => (
+                                          <span
+                                            key={antIndex}
+                                            className="px-3 py-1 bg-linear-to-r from-rose-50 to-pink-50 border border-rose-200 rounded-lg text-rose-700 font-patrick text-sm cursor-default"
+                                          >
+                                            {antonym}
+                                          </span>
+                                        ))}
+                                        {definition.antonyms.length > 5 && (
+                                          <span className="px-3 py-1 bg-rose-100 border border-rose-300 rounded-lg text-rose-800 font-patrick text-sm cursor-default">
+                                            +{definition.antonyms.length - 5} more
+                                          </span>
+                                        )}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                          
+                          {/* SHOW MORE BUTTON SECTION */}
+                          {meaning.definitions?.length > 3 && (
+                            <div className="text-center mt-4">
+                              <button
+                                onClick={() => {
+                                  // Toggle showing all definitions
+                                  const expanded = expandedParts[meaning.partOfSpeech] || false;
+                                  setExpandedParts(prev => ({
+                                    ...prev,
+                                    [meaning.partOfSpeech]: !expanded
+                                  }));
+                                }}
+                                className="px-4 py-2 text-sm font-patrick text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors duration-200 cursor-pointer"
+                              >
+                                {expandedParts[meaning.partOfSpeech] ? 'Show fewer definitions' : `Show ${meaning.definitions.length - 3} more definitions`}
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Add a subtle separator between parts of speech, but not after the last one */}
+                        {index < definitions.meanings.length - 1 && (
+                          <div className="pt-4">
+                            <div className="h-px bg-linear-to-r from-transparent via-slate-200 to-transparent"></div>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
 
             {/* ADDITIONAL INFORMATION SECTION */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
