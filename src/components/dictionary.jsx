@@ -584,29 +584,35 @@ function Dictionary() {
           </div>
         )}
 
-        {/* FOOTER TIPS SECTION */}
-        <div className="ml-8 mt-8 pt-6 border-t border-slate-200">
-          <h4 className="text-lg font-bold font-patrick text-blue-700 mb-4">
-            💡 Dictionary Tips:
+        {/* FOOTER API REFERENCE SECTION */}
+        <div className="ml-4 mt-8 pt-6 border-t border-slate-200">
+          <h4 className="text-lg md:text-xl font-bold font-patrick text-slate-700 mb-4 text-left md:text-left">
+            💡 API References Used:
           </h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-slate-100">
-              <h5 className="font-bold font-patrick text-slate-700 mb-2">🔊 Audio Pronunciation</h5>
-              <p className="text-sm text-slate-600 font-patrick">
-                Click the listen button to hear how the word is pronounced
-              </p>
-            </div>
-            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-slate-100">
-              <h5 className="font-bold font-patrick text-slate-700 mb-2">📚 Multiple Meanings</h5>
-              <p className="text-sm text-slate-600 font-patrick">
-                Words often have multiple meanings based on their part of speech
-              </p>
-            </div>
-            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-slate-100">
-              <h5 className="font-bold font-patrick text-slate-700 mb-2"> ✨ Quick Search</h5>
-              <p className="text-sm text-slate-600 font-patrick">
-                Quick access to frequently searched terms
-              </p>
+          <div className="bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div className="flex flex-col md:flex-row items-center md:justify-between">
+              {/* Left link */}
+              <a
+                href="https://dictionaryapi.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-base md:text-lg text-blue-600 font-bold hover:underline flex-1 text-center"
+              >
+                Dictionary API
+              </a>
+
+              {/* Divider */}
+              <div className="w-full md:w-0 md:h-6 border-t border-slate-300 md:border-l md:border-t-0 my-2 md:my-0"></div>
+
+              {/* Right link */}
+              <a
+                href="https://www.datamuse.com/api/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-base md:text-lg text-blue-600 font-bold hover:underline flex-1 text-center"
+              >
+                Suggestions API
+              </a>
             </div>
           </div>
         </div>

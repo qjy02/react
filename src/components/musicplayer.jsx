@@ -28,13 +28,36 @@ function MusicPlayer() {
     album: 'Unknown Album'
   });
 
+  const PLACEHOLDER = "https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png";
+  const [isFading, setIsFading] = useState(false);
+  const [currentImage, setCurrentImage] = useState(PLACEHOLDER);
   const [isFlipped, setIsFlipped] = useState(false);
   const audioRef = useRef(null);
   const albumArtRef = useRef(null);
   const progressBarRef = useRef(null);
+  const swipeDirRef = useRef('next');
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [swipeDir, setSwipeDir] = useState('next');
 
   const handleImageFlip = () => {
     setIsFlipped(!isFlipped);
+  };
+
+  const changeAlbumArt = (newImage, direction) => {
+    if (direction) {
+      swipeDirRef.current = direction;
+      setSwipeDir(direction);
+    }
+
+    setIsAnimating(true);
+
+    setTimeout(() => {
+      setCurrentImage(newImage);
+    }, 400);
+
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 420);
   };
 
   // Format time to MM:SS
@@ -45,7 +68,7 @@ function MusicPlayer() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  /// Memory-safe song loading
+  // Load a song from the playlist
   const loadSong = (index) => {
     if (index < 0 || index >= playlist.length) return;
     
@@ -73,6 +96,9 @@ function MusicPlayer() {
       album: 'Unknown Album'
     });
     
+    // Start fade out effect
+    setIsFading(true);
+    
     // Load metadata using jsmediatags if available
     if (window.jsmediatags) {
       window.jsmediatags.read(file, {
@@ -80,13 +106,16 @@ function MusicPlayer() {
           const tags = tag.tags;
           const image = tags.picture;
           
-          // Update album art
-          if (image && albumArtRef.current) {
+          let newImageUrl = "https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png";
+          
+          // Create new image URL if available
+          if (image) {
             const base64String = arrayBufferToBase64(image.data);
-            albumArtRef.current.src = `data:${image.format};base64,${base64String}`;
-          } else {
-            albumArtRef.current.src = "https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png";
+            newImageUrl = `data:${image.format};base64,${base64String}`;
           }
+          
+          // Store the new image for later use (after fade out)
+          changeAlbumArt(newImageUrl);
           
           // Update song details with metadata
           setSongDetails(tags);
@@ -110,9 +139,9 @@ function MusicPlayer() {
         onError: function(error) {
           console.log('Error reading tags:', error);
           setSongDetails(null);
-          if (albumArtRef.current) {
-            albumArtRef.current.src = "https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png";
-          }
+          
+          // Store placeholder as pending image
+          changeAlbumArt(PLACEHOLDER);
           
           // Auto-play even if metadata fails
           if (wasPlaying && audioRef.current) {
@@ -127,6 +156,9 @@ function MusicPlayer() {
         }
       });
     } else {
+      // If jsmediatags is not available, set placeholder
+      changeAlbumArt(PLACEHOLDER);
+      
       // If jsmediatags is not available, still try to auto-play
       if (wasPlaying && audioRef.current) {
         setTimeout(() => {
@@ -137,7 +169,7 @@ function MusicPlayer() {
               setIsPlaying(false);
             });
           }
-        }, 100); // Small delay to ensure audio is loaded
+        }, 100);
       }
     }
   };
@@ -257,18 +289,22 @@ function MusicPlayer() {
         
         {/* ALBUM ART SECTION */}
         <div className="flex justify-center mb-6 sm:mb-8">
-          <div 
-            className="relative w-full max-w-64 sm:max-w-80 aspect-square rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
-            onClick={handleImageFlip}
-          >
-            <img
-              ref={albumArtRef}
-              src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
-              alt="Album Art"
-              className={`w-full h-full object-cover transition-transform duration-300 ${isFlipped ? 'scale-x-[-1]' : ''}`}
+          <div className="relative w-full max-w-64 sm:max-w-80 aspect-square overflow-hidden cursor-pointer" onClick={handleImageFlip}>            {/* CURRENT IMAGE SECTION */}
+            <img ref={albumArtRef} src={currentImage} alt="Album Art"
+              className={`
+                absolute inset-0 w-full h-full object-cover rounded-2xl border-2 border-slate-500/20 to transparent
+                transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                ${
+                  isAnimating
+                    ? swipeDir === 'next'
+                      ? 'opacity-0 translate-x-10 scale-95'
+                      : 'opacity-0 -translate-x-10 scale-95'
+                    : 'opacity-100 translate-x-0 scale-100'
+                }
+                ${isFlipped ? 'scale-x-[-1]' : ''}
+              `}
             />
-            <div className="absolute inset-0 bg-linear-to-t from-slate-600/50 to-transparent"></div>
-            
+            <div className="absolute inset-0"></div>
           </div>
         </div>
 
@@ -278,7 +314,7 @@ function MusicPlayer() {
           <div className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 truncate px-3 sm:px-4 py-2 rounded-xl mb-2 sm:mb-3">
             {currentSongInfo.title}
           </div>
-          <div className="text-blue-gray-300 mt-1 sm:mt-2 text-sm sm:text-base space-y-1">
+          {/* <div className="text-blue-gray-300 mt-1 sm:mt-2 text-sm sm:text-base space-y-1">
             <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-1 sm:gap-2">
               <span className="text-slate-800 font-medium">Artist:</span>
               <span className="truncate">{currentSongInfo.artist}</span>
@@ -287,19 +323,21 @@ function MusicPlayer() {
               <span className="text-slate-800 font-medium">Album:</span>
               <span className="truncate">{currentSongInfo.album}</span>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* CONTROLS SECTION */}
         <div className="flex justify-between items-center mb-6 sm:mb-8">
+          {/* PREVIOUS BUTTON */}
           <button 
-            onClick={() => loadSong((currentIndex - 1 + playlist.length) % playlist.length)} 
+            onClick={() => { changeAlbumArt(currentImage, 'prev'); loadSong((currentIndex - 1 + playlist.length) % playlist.length);}}
             disabled={playlist.length === 0}
             className="cursor-pointer p-2 sm:p-3 hover:text-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <SkipBack size={24} sm:size={28} fill="currentColor" />
           </button>
 
+          {/* DETAILS BUTTON */}
           <button 
             onClick={() => setShowDetailsModal(true)} 
             disabled={playlist.length === 0}
@@ -308,17 +346,19 @@ function MusicPlayer() {
             <Info size={20} sm:size={24} />
           </button>
 
+          {/* PLAY / PAUSE BUTTON */}
           <button 
             onClick={togglePlayPause} 
             disabled={playlist.length === 0}
-            className="cursor-pointer p-4 sm:p-5 bg-linear-to-r from-slate-700 to-slate-600 rounded-full shadow-lg hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-slate-600/25"
+            className="cursor-pointer p-2 sm:p-3 hover:text-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isPlaying ? 
-              <Pause size={28} sm:size={32} fill="white" /> : 
-              <Play size={28} sm:size={32} fill="white" className="ml-0.5 sm:ml-1" />
+              <Pause size={28} sm:size={32} fill="currentColor" /> : 
+              <Play size={28} sm:size={32} fill="currentColor" className="ml-0.5 sm:ml-1" />
             }
           </button>
 
+          {/* REPEAT BUTTONS */}
           <button 
             onClick={() => setIsRepeatingPlaylist(!isRepeatingPlaylist)} 
             disabled={playlist.length === 0}
@@ -327,8 +367,9 @@ function MusicPlayer() {
             <Repeat size={20} sm:size={24} />
           </button>
 
+          {/* NEXT BUTTON */}
           <button 
-            onClick={() => loadSong((currentIndex + 1) % playlist.length)} 
+            onClick={() => { changeAlbumArt(currentImage, 'next'); loadSong((currentIndex + 1) % playlist.length);}}
             disabled={playlist.length === 0}
             className="cursor-pointer p-2 sm:p-3 hover:text-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
