@@ -24,8 +24,11 @@ The project started as a learning exercise and evolved into a fun collection of 
 ## ✨ Features
 
 ### 🎮 Interactive Games
-- **Memory Game**: Match animal emoji cards in this classic memory challenge
-- **More Coming Soon**: Tic Tac Toe and other mini-games in development
+- **Memory Game**: Test your memory by matching animal emoji cards in this classic game, featuring Easy and Hard modes
+- **Tic Tac Toe**: Challenge a friend or the computer in this timeless Xs and Os game  
+- **Dictionary**: Quickly look up english word meanings, synonyms, and examples in real time  
+- **Music Player**: Play your favorite tracks and control playback easily  
+- **More Coming Soon**: Photo Booth and other mini-web applications in development
 
 ## 🚀 Quick Start
 
