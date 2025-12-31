@@ -1,6 +1,6 @@
 // App.jsx
 import './css/style.css';
-import { HashRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useNavigate, useLocation, Navigate as RouterNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Layout from './components/layout';
 import Hello from './components/hello';
@@ -36,28 +36,31 @@ function NavigateWithNavigation() {
 
 function App() {
   const location = useLocation();
-  const [introDone, setIntroDone] = useState(() => {
-    const hash = window.location.hash;
-    // Check if we're on any route except the root
-    return hash !== '#/' && hash !== '';
-  });
-
+  const [showHello, setShowHello] = useState(true);
+  
+  // Reset showHello when we're at the root path
   useEffect(() => {
-    // Update introDone based on current location
-    // If we're on the root path, show intro, otherwise hide it
-    const isRootPath = location.pathname === '/' && location.hash === '#/';
-    setIntroDone(!isRootPath);
+    // With HashRouter, the root path is either empty hash or '#/'
+    const isRootPath = location.hash === '#/' || location.hash === '';
+    
+    if (isRootPath) {
+      setShowHello(true);
+    }
   }, [location]);
 
   return (
     <div className="flex-1 flex flex-col items-center justify-center">
       <Routes>
-        { /* HOME / NAVIGATE */ }
+        { /* ROOT PATH */ }
         <Route 
           path="/" 
           element={
-            !introDone ? (
-              <Hello onFinish={() => setIntroDone(true)} />
+            showHello ? (
+              <Hello 
+                onFinish={() => {
+                  setShowHello(false);
+                }} 
+              />
             ) : (
               <NavigateWithNavigation />
             )
