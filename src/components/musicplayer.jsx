@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import '../css/style.css';
 import { 
   Play, 
   Pause, 

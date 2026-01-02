@@ -9,7 +9,8 @@ function Navigate({ onCardClick }) {
     { id: 3, title: 'Dictionary', image: 'card/dictionary.png', page: 'dictionary', path: paths.dictionary },
     { id: 4, title: 'Music Player', image: 'card/musicplayer.png', page: 'musicplayer', paths: paths.musicPlayer },
     { id: 5, title: 'Photo Booth', image: 'card/photobooth.png', page: '', path: '' },
-    { id: 6, title: '???', image: 'vipo/vipo_shocked.png', page: '', path: '' },
+    // { id: 6, title: 'Dinner Time', image: 'card/dinner.png', page: 'dinner', path: paths.dinner },
+    { id: 6, title: 'Dinner Time', image: 'card/dinner.png', page: '', path: '' },
     { id: 7, title: '???', image: 'vipo/vipo_confused.png', page: '', path: '' },
     { id: 8, title: '???', image: 'vipo/vipo_sleepy.png', page: '', path: '' },
   ];

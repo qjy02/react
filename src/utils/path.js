@@ -1,5 +1,3 @@
-import MusicPlayer from "../components/musicplayer";
-
 // utils/paths.js
 const BASE_PATH = '/react';
 
@@ -10,6 +8,7 @@ export const paths = {
   ticTacToe: `${BASE_PATH}/tictactoe`,
   dictionary: `${BASE_PATH}/dictionary`,
   musicPlayer: `${BASE_PATH}/musicplayer`,
+  dinner: `${BASE_PATH}/dinner`,
 };
 
 // Helper function to navigate

@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
+import '../css/style.css';
 
 function TicTacToe() {
     // Game state

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Header from './header';
 import Footer from './footer';
+import '../css/style.css';
 
 function Layout({ children }) {
   const [showScrollTop, setShowScrollTop] = useState(false);

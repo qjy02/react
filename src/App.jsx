@@ -11,6 +11,7 @@ import MemoryGame from './components/memorygame';
 import TicTacToe from './components/tictactoe';
 import Dictionary from './components/dictionary';  
 import MusicPlayer from './components/musicplayer';
+import Dinner from './components/dinner';
 
 function NavigateWithNavigation() {
   const navigate = useNavigate();
@@ -28,6 +29,9 @@ function NavigateWithNavigation() {
     }
     else if (page === 'musicplayer') {
       navigate('/musicplayer');
+    }
+    else if (page === 'dinner') {
+      navigate('/dinner');
     }
   };
   
@@ -89,6 +93,12 @@ function App() {
         <Route
           path="/musicplayer"
           element={<MusicPlayer />}
+        />
+
+        { /* DINNER TIME */ }
+        <Route
+          path="/dinner"
+          element={<Dinner />}
         />
       </Routes>
     </div>
