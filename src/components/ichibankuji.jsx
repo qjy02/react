@@ -320,7 +320,7 @@ function IchibanKuji() {
           {/* STATS SECTION */}
           <div className="flex justify-center items-center gap-4 sm:gap-6 mb-8 flex-wrap">
             <div className="bg-blue-50 px-4 sm:px-6 py-3 rounded-lg min-w-30">
-              <p className="text-xs sm:text-sm text-slate-500">Total</p>
+              <p className="text-xs sm:text-sm text-slate-500">Total Pulls</p>
               <p className="text-2xl sm:text-3xl font-bold text-blue-600">{drawHistory.length}</p>
             </div>
           </div>
