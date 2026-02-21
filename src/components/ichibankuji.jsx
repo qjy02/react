@@ -319,18 +319,20 @@ function IchibanKuji() {
            </div>
 
            {/* PERIOD INFORMATION SECTION */}
-           <dl className="period text-center mb-6 px-4">
-            <dt className="inline-block font-bold text-gray-700 mr-2">販売期間</dt>
-            <dd className="inline-block">
-                <span id="ctl00_body_LotteryPlanSaleStartDateLabel" className="text-gray-600">
-                2026年2月20日(金) 17:30
+          <div className="bg-amber-100/70 border border-amber-300 rounded-lg p-4 mb-6">
+            <dl className="period text-center px-4">
+              <dt className="inline-block font-bold text-gray-700 mr-2">販売期間</dt>
+              <dd className="inline-block">
+                <span id="ctl00_body_LotteryPlanSaleStartDateLabel" className="text-gray-700">
+                  2026年2月20日(金) 17:30
                 </span>
-                <span className="mx-1 text-gray-600">～</span>
-                <span id="ctl00_body_LotteryPlanSaleEndDateLabel" className="text-gray-600">
-                2026年3月13日(金) 23:59
+                <span className="mx-1 text-gray-700">～</span>
+                <span id="ctl00_body_LotteryPlanSaleEndDateLabel" className="text-gray-700">
+                  2026年3月13日(金) 23:59
                 </span>
-            </dd>
-           </dl>
+              </dd>
+            </dl>
+          </div>
                 
           {/* STATS SECTION */}
           <div className="flex justify-center items-center gap-4 sm:gap-6 mb-8 flex-wrap">
@@ -338,76 +340,6 @@ function IchibanKuji() {
               <p className="text-xs sm:text-sm text-slate-500">Total Pulls</p>
               <p className="text-2xl sm:text-3xl font-bold text-blue-600">{drawHistory.length}</p>
             </div>
-          </div>
-
-          {/* DRAW BUTTONS SECTION */}
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8">
-            {/* Single Draw Button */}
-            <button
-              onClick={drawSinglePrize}
-              disabled={isDrawing}
-              className={`
-                px-6 sm:px-8 py-3 sm:py-4 text-lg sm:text-xl font-bold font-patrick rounded-lg
-                transition-all duration-300 transform cursor-pointer
-                ${isDrawing
-                  ? 'bg-gray-400 cursor-not-allowed opacity-50'
-                  : 'bg-pink-500 hover:bg-pink-600 active:bg-pink-700 shadow-[0_8px_0_0_#9d174d] hover:shadow-[0_4px_0_0_#9d174d] active:shadow-[0_2px_0_0_#9d174d] active:translate-y-1.5 hover:translate-y-0.5 hover:scale-105'
-                }
-                text-white border-2 border-pink-700
-                w-full sm:w-48 relative
-              `}
-            >
-              <span className="block transform transition-transform">
-                1回くじ
-              </span>
-              <span className="block text-xs sm:text-sm mt-1 opacity-90">
-                1枚 770円
-              </span>
-            </button>
-
-            {/* Ten Times Draw Button */}
-            <button
-              onClick={drawTenPrizes}
-              disabled={isDrawing}
-              className={`
-                px-6 sm:px-8 py-3 sm:py-4 text-lg sm:text-xl font-bold font-patrick rounded-lg
-                transition-all duration-300 transform cursor-pointer
-                ${isDrawing
-                  ? 'bg-gray-400 cursor-not-allowed opacity-50'
-                  : 'bg-blue-500 hover:bg-blue-600 active:bg-blue-700 shadow-[0_8px_0_0_#1e40af] hover:shadow-[0_4px_0_0_#1e40af] active:shadow-[0_2px_0_0_#1e40af] active:translate-y-1.5 hover:translate-y-0.5 hover:scale-105'
-                }
-                text-white border-2 border-blue-700
-                w-full sm:w-48 relative
-              `}
-            >
-              <span className="block transform transition-transform">
-                10回くじ
-              </span>
-              <span className="block text-xs sm:text-sm mt-1 opacity-90">
-                10枚 7,700円
-              </span>
-            </button>
-
-            {/* Reset Button */}
-            <button
-              onClick={resetKuji}
-              className={`
-                px-6 sm:px-8 py-3 sm:py-4 text-lg sm:text-xl font-bold font-patrick rounded-lg
-                transition-all duration-300 transform cursor-pointer
-                bg-purple-300 hover:bg-purple-400 active:bg-purple-500
-                shadow-[0_8px_0_0_#6b21a8] hover:shadow-[0_4px_0_0_#6b21a8] active:shadow-[0_2px_0_0_#6b21a8]
-                active:translate-y-1.5 hover:translate-y-0.5 hover:scale-105
-                text-purple-900 border-2 border-purple-600
-                w-full sm:w-48 relative
-              `}
-            >
-              <span className="block transform transition-transform">
-                リセット
-              </span>
-              <span className="block text-xs sm:text-sm mt-1 opacity-90">
-                Reset Kuji
-              </span>
-            </button>
           </div>
 
           {/* LOADING EFFECT */}
@@ -514,6 +446,198 @@ function IchibanKuji() {
             </div>
           )}
 
+          {/* DRAW BUTTONS SECTION */}
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-6 mb-8">
+            <div className="flex flex-row justify-center gap-2 w-full sm:hidden">
+              {/* SINGLE DRAW BUTTON */}
+              <button
+                onClick={drawSinglePrize}
+                disabled={isDrawing}
+                className={`
+                  px-2 py-2 text-sm font-bold font-patrick rounded-lg flex-1
+                  transition-all duration-300 transform cursor-pointer
+                  ${isDrawing
+                    ? 'bg-gray-400 cursor-not-allowed opacity-50'
+                    : 'bg-pink-500 hover:bg-pink-600 active:bg-pink-700 shadow-[0_4px_0_0_#9d174d] hover:shadow-[0_2px_0_0_#9d174d] active:shadow-[0_1px_0_0_#9d174d] active:translate-y-1 hover:translate-y-0.5'
+                  }
+                  text-white border-2 border-pink-700
+                  relative
+                `}
+              >
+                <span className="block transform transition-transform">
+                  1回くじ
+                </span>
+                <span className="block text-xs mt-0.5 opacity-90">
+                  1枚 770円
+                </span>
+              </button>
+
+              {/* TEN TIMES DRAW BUTTON */}
+              <button
+                onClick={drawTenPrizes}
+                disabled={isDrawing}
+                className={`
+                  px-2 py-2 text-sm font-bold font-patrick rounded-lg flex-1
+                  transition-all duration-300 transform cursor-pointer
+                  ${isDrawing
+                    ? 'bg-gray-400 cursor-not-allowed opacity-50'
+                    : 'bg-blue-500 hover:bg-blue-600 active:bg-blue-700 shadow-[0_4px_0_0_#1e40af] hover:shadow-[0_2px_0_0_#1e40af] active:shadow-[0_1px_0_0_#1e40af] active:translate-y-1 hover:translate-y-0.5'
+                  }
+                  text-white border-2 border-blue-700
+                  relative
+                `}
+              >
+                <span className="block transform transition-transform">
+                  10回くじ
+                </span>
+                <span className="block text-xs mt-0.5 opacity-90">
+                  10枚 7,700円
+                </span>
+              </button>
+            </div>
+
+            <button
+              onClick={drawSinglePrize}
+              disabled={isDrawing}
+              className={`
+                hidden sm:block px-8 py-4 text-xl font-bold font-patrick rounded-lg
+                transition-all duration-300 transform cursor-pointer
+                ${isDrawing
+                  ? 'bg-gray-400 cursor-not-allowed opacity-50'
+                  : 'bg-pink-500 hover:bg-pink-600 active:bg-pink-700 shadow-[0_8px_0_0_#9d174d] hover:shadow-[0_4px_0_0_#9d174d] active:shadow-[0_2px_0_0_#9d174d] active:translate-y-1.5 hover:translate-y-0.5 hover:scale-105'
+                }
+                text-white border-2 border-pink-700
+                w-48 relative
+              `}
+            >
+              <span className="block transform transition-transform">
+                1回くじ
+              </span>
+              <span className="block text-sm mt-1 opacity-90">
+                1枚 770円
+              </span>
+            </button>
+
+            <button
+              onClick={drawTenPrizes}
+              disabled={isDrawing}
+              className={`
+                hidden sm:block px-8 py-4 text-xl font-bold font-patrick rounded-lg
+                transition-all duration-300 transform cursor-pointer
+                ${isDrawing
+                  ? 'bg-gray-400 cursor-not-allowed opacity-50'
+                  : 'bg-blue-500 hover:bg-blue-600 active:bg-blue-700 shadow-[0_8px_0_0_#1e40af] hover:shadow-[0_4px_0_0_#1e40af] active:shadow-[0_2px_0_0_#1e40af] active:translate-y-1.5 hover:translate-y-0.5 hover:scale-105'
+                }
+                text-white border-2 border-blue-700
+                w-48 relative
+              `}
+            >
+              <span className="block transform transition-transform">
+                10回くじ
+              </span>
+              <span className="block text-sm mt-1 opacity-90">
+                10枚 7,700円
+              </span>
+            </button>
+
+            {/* RESET BUTTON */}
+            <button
+              onClick={resetKuji}
+              className={`
+                px-4 sm:px-8 py-2 sm:py-4 text-base sm:text-xl font-bold font-patrick rounded-lg
+                transition-all duration-300 transform cursor-pointer
+                bg-purple-300 hover:bg-purple-400 active:bg-purple-500
+                shadow-[0_4px_0_0_#6b21a8] sm:shadow-[0_8px_0_0_#6b21a8] hover:shadow-[0_2px_0_0_#6b21a8] sm:hover:shadow-[0_4px_0_0_#6b21a8] active:shadow-[0_1px_0_0_#6b21a8] sm:active:shadow-[0_2px_0_0_#6b21a8]
+                active:translate-y-1 sm:active:translate-y-1.5 hover:translate-y-0.5
+                text-purple-900 border-2 border-purple-600
+                w-full sm:w-48 relative
+              `}
+            >
+              <span className="block transform transition-transform">
+                リセット
+              </span>
+              <span className="block text-xs sm:text-sm mt-1 opacity-90">
+                Reset Kuji
+              </span>
+            </button>
+          </div>
+
+          {/* VIEW HISTORY BUTTON */}
+          {drawHistory.length > 0 && (
+            <div className="mb-4">
+                <button
+                onClick={() => setShowHistory(!showHistory)}
+                className={`
+                    px-4 sm:px-5 py-2 sm:py-2.5 text-base sm:text-lg font-bold font-patrick rounded-lg
+                    transition-all duration-300 transform cursor-pointer
+                    bg-emerald-400 hover:bg-emerald-500 active:bg-emerald-600 
+                    shadow-[0_6px_0_0_#047857] hover:shadow-[0_3px_0_0_#047857] 
+                    active:shadow-[0_1px_0_0_#047857] active:translate-y-1 
+                    hover:translate-y-0.5 hover:scale-105
+                    text-white border-2 border-emerald-600
+                    w-full sm:w-auto relative
+                `}
+                >
+                <span className="block transform transition-transform">
+                    {showHistory ? 'Hide History' : 'View History'}
+                </span>
+                </button>
+            </div>
+            )}
+
+          {/* DRAW HISTORY SECTION */}
+          {showHistory && drawHistory.length > 0 && (
+            <div className="mb-8">
+                <div className="bg-gray-50 p-3 sm:p-4 rounded-xl">
+                {/* History Stats */}
+                <div className="mb-4 grid grid-cols-2 sm:grid-cols-5 gap-2">
+                    {Object.values(getPrizeStats()).map((stat) => (
+                    <div key={stat.id} className="bg-white p-2 rounded-lg text-center kuji-stat-card">
+                        <div className={`text-xs font-bold bg-linear-to-r ${stat.color} bg-clip-text text-transparent`}>
+                        {stat.name}
+                        </div>
+                        <div className="text-base sm:text-lg font-bold text-slate-700">{stat.count}</div>
+                        <div className="text-xs text-slate-500">{stat.percentage}%</div>
+                    </div>
+                    ))}
+                </div>
+                
+                {/* History Grid */}
+                <h4 className="text-sm sm:text-md font-bold text-slate-600 mb-2">History List:</h4>
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2">
+                    {drawHistory.slice(0, 1000).map((draw, index) => (
+                    <div
+                        key={index}
+                        className={`
+                        aspect-square rounded-lg flex items-center justify-center
+                        bg-linear-to-br ${draw.color} text-white
+                        shadow-md transform transition-all duration-300
+                        hover:scale-110 cursor-pointer p-1 relative group
+                        `}
+                        title={`${draw.selectedItem.name} (${draw.id})`}
+                        onClick={() => setSelectedDraw(draw)}
+                    >
+                        {imageErrors[draw.selectedItem.id] ? (
+                        <span className="text-xl animate-kuji-bounce">🎁</span>
+                        ) : (
+                        <img 
+                            src={draw.selectedItem.image}
+                            alt={draw.selectedItem.name}
+                            className="w-full h-full object-contain"
+                            onError={() => handleImageError(draw.selectedItem.id)}
+                        />
+                        )}
+                        {/* Tooltip */}
+                        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10 pointer-events-none hidden sm:block">
+                        {draw.selectedItem.name}
+                        </div>
+                    </div>
+                    ))}
+                </div>
+                </div>
+            </div>
+            )}
+
           {/* PRIZE TABLE SECTION */}
           <div className="mb-8">
             <h3 className="text-lg sm:text-xl font-bold text-slate-700 mb-4">Prize List</h3>
@@ -565,7 +689,6 @@ function IchibanKuji() {
                             className="bg-white rounded-lg p-1.5 sm:p-3 shadow-md hover:shadow-xl transform transition-all duration-300 hover:scale-105 cursor-pointer border border-blue-100"
                             onClick={(e) => {
                                 e.stopPropagation();
-                                // Create a temporary draw object to reuse the dialog
                                 setSelectedDraw({
                                 ...prize,
                                 selectedItem: item
@@ -603,88 +726,7 @@ function IchibanKuji() {
             </div>
           </div>
 
-          {/* VIEW HISTORY BUTTON */}
-          {drawHistory.length > 0 && (
-            <div className="mb-4">
-                <button
-                onClick={() => setShowHistory(!showHistory)}
-                className={`
-                    px-4 sm:px-5 py-2 sm:py-2.5 text-base sm:text-lg font-bold font-patrick rounded-lg
-                    transition-all duration-300 transform cursor-pointer
-                    bg-emerald-400 hover:bg-emerald-500 active:bg-emerald-600 
-                    shadow-[0_6px_0_0_#047857] hover:shadow-[0_3px_0_0_#047857] 
-                    active:shadow-[0_1px_0_0_#047857] active:translate-y-1 
-                    hover:translate-y-0.5 hover:scale-105
-                    text-white border-2 border-emerald-600
-                    w-full sm:w-auto relative
-                `}
-                >
-                <span className="block transform transition-transform">
-                    {showHistory ? 'Hide History' : 'View History'}
-                </span>
-                </button>
-            </div>
-            )}
-
-          {/* DRAW HISTORY SECTION */}
-          {showHistory && drawHistory.length > 0 && (
-            <div className="mb-8">
-                <div className="bg-gray-50 p-3 sm:p-4 rounded-xl">
-                {/* History Stats */}
-                <div className="mb-4 grid grid-cols-2 sm:grid-cols-5 gap-2">
-                    {Object.values(getPrizeStats()).map((stat) => (
-                    <div key={stat.id} className="bg-white p-2 rounded-lg text-center kuji-stat-card">
-                        <div className={`text-xs font-bold bg-linear-to-r ${stat.color} bg-clip-text text-transparent`}>
-                        {stat.name}
-                        </div>
-                        <div className="text-base sm:text-lg font-bold text-slate-700">{stat.count}</div>
-                        <div className="text-xs text-slate-500">{stat.percentage}%</div>
-                    </div>
-                    ))}
-                </div>
-                
-                {/* History Grid */}
-                <h4 className="text-sm sm:text-md font-bold text-slate-600 mb-2">Recent Draws:</h4>
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2">
-                    {drawHistory.slice(0, 20).map((draw, index) => (
-                    <div
-                        key={index}
-                        className={`
-                        aspect-square rounded-lg flex items-center justify-center
-                        bg-linear-to-br ${draw.color} text-white
-                        shadow-md transform transition-all duration-300
-                        hover:scale-110 cursor-pointer p-1 relative group
-                        `}
-                        title={`${draw.selectedItem.name} (${draw.id})`}
-                        onClick={() => setSelectedDraw(draw)}
-                    >
-                        {imageErrors[draw.selectedItem.id] ? (
-                        <span className="text-xl animate-kuji-bounce">🎁</span>
-                        ) : (
-                        <img 
-                            src={draw.selectedItem.image}
-                            alt={draw.selectedItem.name}
-                            className="w-full h-full object-contain"
-                            onError={() => handleImageError(draw.selectedItem.id)}
-                        />
-                        )}
-                        {/* Tooltip */}
-                        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10 pointer-events-none hidden sm:block">
-                        {draw.selectedItem.name}
-                        </div>
-                    </div>
-                    ))}
-                </div>
-                {drawHistory.length > 20 && (
-                    <p className="text-xs text-center text-gray-500 mt-2">
-                    Showing 20 most recent draws
-                    </p>
-                )}
-                </div>
-            </div>
-            )}
-
-            {/* Draw Details Dialog */}
+            {/* DRAW DETAILS DIALOG SECTION */}
             {selectedDraw && (
             <div 
                 className="fixed inset-0 flex items-center justify-center z-50 p-4"
@@ -695,28 +737,29 @@ function IchibanKuji() {
                 
                 {/* Dialog content */}
                 <div 
-                className="bg-white rounded-xl max-w-sm w-full shadow-2xl transform transition-all relative"
+                className="bg-white rounded-xl max-w-2xl w-full shadow-2xl transform transition-all relative"
                 onClick={(e) => e.stopPropagation()}
                 >
                 {/* Header with close button */}
-                <div className="flex justify-end p-2">
+                <div className="flex justify-end p-4">
                     <button
                     onClick={() => setSelectedDraw(null)}
                     className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
                     aria-label="Close"
                     >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                     </button>
                 </div>
                 
                 {/* Content */}
-                <div className="px-6 pb-6 text-center">
-                    <div className="mb-4">
-                    <div className={`flex items-center justify-center w-32 h-32 mx-auto bg-linear-to-br ${selectedDraw.color} mb-3 rounded-xl overflow-hidden`}>
+                <div className="px-8 pb-8 text-center">
+                    <div className="mb-6">
+                    {/* Larger image container */}
+                    <div className={`flex items-center justify-center w-64 h-64 sm:w-80 sm:h-80 mx-auto bg-linear-to-br ${selectedDraw.color} mb-4 rounded-xl overflow-hidden`}>
                         {imageErrors[selectedDraw.selectedItem.id] ? (
-                        <span className="text-4xl animate-kuji-bounce">🎁</span>
+                        <span className="text-8xl animate-kuji-bounce">🎁</span>
                         ) : (
                         <img 
                             src={selectedDraw.selectedItem.image}
@@ -726,11 +769,14 @@ function IchibanKuji() {
                         />
                         )}
                     </div>
-                    <h3 className="text-xl font-bold text-slate-800 mb-1">
+                    
+                    {/* Prize name */}
+                    <h3 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-3">
                         {selectedDraw.selectedItem.name}
                     </h3>
-                    {/* Grey description */}
-                    <p className="text-sm text-slate-500 mt-1">
+                    
+                    {/* Description */}
+                    <p className="text-base sm:text-lg text-slate-500 max-w-md mx-auto">
                         {selectedDraw.selectedItem.description}
                     </p>
                     </div>
