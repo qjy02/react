@@ -12,6 +12,7 @@ import TicTacToe from './components/tictactoe';
 import Dictionary from './components/dictionary';  
 import MusicPlayer from './components/musicplayer';
 import Dinner from './components/dinner';
+import IchibanKuji from './components/ichibankuji';
 
 function NavigateWithNavigation() {
   const navigate = useNavigate();
@@ -32,6 +33,9 @@ function NavigateWithNavigation() {
     }
     else if (page === 'dinner') {
       navigate('/dinner');
+    }
+    else if (page === 'ichibankuji') {
+      navigate('/ichibankuji');
     }
   };
   
@@ -99,6 +103,12 @@ function App() {
         <Route
           path="/dinner"
           element={<Dinner />}
+        />
+
+        { /* ICHIBAN KUJI */ }
+        <Route
+          path="/ichibankuji"
+          element={<IchibanKuji />}
         />
       </Routes>
     </div>

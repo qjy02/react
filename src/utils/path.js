@@ -9,6 +9,7 @@ export const paths = {
   dictionary: `${BASE_PATH}/dictionary`,
   musicPlayer: `${BASE_PATH}/musicplayer`,
   dinner: `${BASE_PATH}/dinner`,
+  ichibankuji: `${BASE_PATH}/ichibankuji`
 };
 
 // Helper function to navigate

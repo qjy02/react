@@ -333,3 +333,123 @@ button:not(:disabled):hover {
 }
 
 /* DINNER SECTION */
+
+
+/* KUJI SECTION */
+
+@keyframes kuji-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes kuji-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes kuji-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes kuji-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation classes */
+.animate-kuji-spin {
+  animation: kuji-spin 1s linear infinite;
+}
+
+.animate-kuji-pulse {
+  animation: kuji-pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-kuji-bounce {
+  animation: kuji-bounce 1s infinite;
+}
+
+.animate-kuji-fadeIn {
+  animation: kuji-fadeIn 0.5s ease-out;
+}
+
+/* Custom scrollbar for Kuji history (scoped) */
+.kuji-history-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #8b5cf6 #e9d5ff;
+}
+
+.kuji-history-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.kuji-history-scroll::-webkit-scrollbar-track {
+  background: #e9d5ff;
+  border-radius: 10px;
+}
+
+.kuji-history-scroll::-webkit-scrollbar-thumb {
+  background: #8b5cf6;
+  border-radius: 10px;
+}
+
+.kuji-history-scroll::-webkit-scrollbar-thumb:hover {
+  background: #7c3aed;
+}
+
+@keyframes kuji-spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes kuji-bounce-dots {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.animate-kuji-spin-reverse {
+  animation: kuji-spin-reverse 1.5s linear infinite;
+}
+
+.animate-kuji-bounce-dots {
+  animation: kuji-bounce-dots 1.2s ease-in-out infinite;
+}
+
+/* Kuji stat card hover effect */
+.kuji-stat-card {
+  transition: all 0.3s ease;
+}
+
+.kuji-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
