@@ -302,20 +302,35 @@ function IchibanKuji() {
           {/* KUJI IMAGE SECTION */}
           <div className="mb-8 flex justify-center px-4">
             <div className="relative group w-full max-w-md">
-                {imageErrors['main'] ? (
-                <div className="w-full aspect-square bg-linear-to-br from-gray-400 to-gray-600 rounded-2xl shadow-lg border-4 border-grayf-200 flex items-center justify-center">
-                    <span className="text-7xl sm:text-8xl animate-kuji-bounce">🎁</span>
-                </div>
-                ) : (
+                {!imageErrors['main'] ? (
                 <img 
                     src={getMainImageSrc()}
                     alt={config.title}
-                    className="w-full aspect-square object-contain rounded-2xl shadow-lg border-4 border-gray-200"
+                    className="w-full aspect-square object-contain rounded-2xl shadow-lg"
                     onError={() => handleImageError('main')}
                 />
+                ) : (
+                // Optional: Show a fallback image or placeholder when the main image fails to load
+                <div className="w-full aspect-square rounded-2xl shadow-lg bg-gray-100 flex items-center justify-center">
+                    <span className="text-gray-400">画像が見つかりません</span>
+                </div>
                 )}
             </div>
            </div>
+
+           {/* PERIOD INFORMATION SECTION */}
+           <dl className="period text-center mb-6 px-4">
+            <dt className="inline-block font-bold text-gray-700 mr-2">販売期間</dt>
+            <dd className="inline-block">
+                <span id="ctl00_body_LotteryPlanSaleStartDateLabel" className="text-gray-600">
+                2026年2月20日(金) 17:30
+                </span>
+                <span className="mx-1 text-gray-600">～</span>
+                <span id="ctl00_body_LotteryPlanSaleEndDateLabel" className="text-gray-600">
+                2026年3月13日(金) 23:59
+                </span>
+            </dd>
+           </dl>
                 
           {/* STATS SECTION */}
           <div className="flex justify-center items-center gap-4 sm:gap-6 mb-8 flex-wrap">
